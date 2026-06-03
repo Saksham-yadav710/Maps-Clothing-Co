@@ -18,7 +18,13 @@ uploadrouter.post("/", auth, upload.single("image"), async (req, res) => {
 
     const result = await cloudinary.uploader.upload(dataURI, {
       folder: "grocery-del",
-      resource_type: "auto",
+      resource_type: "image",
+      transformation: [
+        {
+          fetch_format: "auto",
+          quality: "auto",
+        },
+      ],
     });
 
     res.json({ url: result.secure_url });

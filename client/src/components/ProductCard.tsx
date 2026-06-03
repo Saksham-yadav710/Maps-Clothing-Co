@@ -11,6 +11,14 @@ const ProductCard = ({ product }: Props) => {
   const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$";
   const { addToCart } = useCart();
   const navigate = useNavigate();
+  const optimizeCloudinary = (url: string) => {
+    if (!url.includes("cloudinary.com")) return url;
+
+    return url.replace(
+      "/image/upload/",
+      "/image/upload/f_auto,q_auto,w_450,c_limit/",
+    );
+  };
   return (
     <div
       className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-md transition-all duration-300 group animate-fade-in cursor-pointer"
@@ -19,9 +27,13 @@ const ProductCard = ({ product }: Props) => {
       {/* image */}
       <div className="relative aspect-square overflow-hidden">
         <img
-          src={product.image}
+          src={optimizeCloudinary(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover p-4 group-hover:p-2 transition-all duration-300 "
+          loading="lazy"
+          decoding="async"
+          width={225}
+          height={225}
+          className="w-full h-full object-cover p-4 group-hover:p-2 transition-all duration-300"
         />
         {/* badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
@@ -68,6 +80,7 @@ const ProductCard = ({ product }: Props) => {
             )}
           </div>
           <button
+            aria-label="increase stock amount"
             onClick={(e) => {
               e.stopPropagation();
               addToCart(product);
@@ -75,7 +88,6 @@ const ProductCard = ({ product }: Props) => {
             className="size-7 rounded-full bg-app-orange text-white flex-center shrink-0 hover:bg-app-orange-dark transition-colors active:scale-95"
           >
             <Plus className="size-3.5" />
-            {}
           </button>
         </div>
       </div>

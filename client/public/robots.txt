@@ -1,0 +1,27 @@
+User-agent: *
+
+# Public pages
+Allow: /
+Allow: /products
+Allow: /products/
+Allow: /flash-deals
+Allow: /search
+
+# Private customer pages
+Disallow: /checkout
+Disallow: /orders
+Disallow: /addresses
+
+# Admin area
+Disallow: /admin
+
+# Delivery partner area
+Disallow: /delivery
+
+# Authentication pages
+Disallow: /login
+
+# API endpoints
+Disallow: /api/
+
+Sitemap: https://yourdomain.com/sitemap.xml

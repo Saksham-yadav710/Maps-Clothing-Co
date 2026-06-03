@@ -50,11 +50,11 @@ const CartSidebar = () => {
               </span>
             </div>
             <button
+              aria-label="close cart"
               onClick={() => setIsCartOpen(false)}
               className="p-2 rounded-xl hover:bg-app-cream transition-colors"
             >
               <XIcon className="size-5" />
-              {""}
             </button>
           </div>
 
@@ -87,13 +87,13 @@ const CartSidebar = () => {
                     <div className="flex items-center justify-between mt-2">
                       <div className="flex items-center gap-1.5">
                         <button
+                          aria-label="decrease stock"
                           onClick={() =>
                             updateQuantity(item.product.id, item.quantity - 1)
                           }
                           className="size-7 rounded-lg bg-white border border-app-border flex-center"
                         >
                           <MinusIcon className="size-3" />
-                          {""}
                         </button>
 
                         <span className="text-sm font-semibold w-6 text-center">
@@ -101,13 +101,13 @@ const CartSidebar = () => {
                         </span>
 
                         <button
+                          aria-label="increase stock"
                           onClick={() =>
                             updateQuantity(item.product.id, item.quantity + 1)
                           }
                           className="size-7 rounded-lg bg-white border border-app-border flex-center"
                         >
                           <PlusIcon className="size-3" />
-                          {""}
                         </button>
                       </div>
                       <div className="flex items-center gap-2">
@@ -116,11 +116,11 @@ const CartSidebar = () => {
                           {(item.product.price * item.quantity).toFixed(2)}
                         </span>
                         <button
+                          aria-label="delete item from stock"
                           onClick={() => removeFromCart(item.product.id)}
                           className="p-1 text-app-text-light hover:text-app-error transition-colors"
                         >
                           <Trash2Icon className="size-4" />
-                          {""}
                         </button>
                       </div>
                     </div>

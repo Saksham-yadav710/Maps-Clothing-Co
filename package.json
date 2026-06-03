@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix client\" \"npm run server --prefix server\"",
-    "whole-app": "npm run dev && npm run start "
+    "preview": "npm run build --prefix client && concurrently \"npm run preview --prefix client\" \"npm run start --prefix server\""
   },
   "devDependencies": {
     "concurrently": "^10.0.3"
