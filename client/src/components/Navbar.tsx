@@ -1,6 +1,5 @@
 import {
   ArrowUpRightIcon,
-  BikeIcon,
   ChevronDownIcon,
   LogOutIcon,
   MapPinIcon,
@@ -17,6 +16,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 
+// 1. Import your logo using a relative path
+import logoImg from "../assets/logo.png";
+
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { cartCount, setIsCartOpen } = useCart();
@@ -24,7 +26,7 @@ const Navbar = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleSearch = (e: React.SubmitEvent) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
@@ -41,14 +43,17 @@ const Navbar = () => {
   return (
     <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 gap-4">
-        {/* logo */}
+        {/* Logo Section Updated */}
         <Link
-          aria-label="logo"
+          aria-label="MAPS Home"
           to="/"
-          className="flex items-center gap-2 text-[22px] font-medium shrink-0"
+          className="flex items-center shrink-0"
         >
-          <BikeIcon size={24} />
-          <span className="hidden sm:inline">FreshCart</span>
+          <img
+            src={logoImg}
+            alt="MAPS Logo"
+            className="h-20 w-auto object-contain py-1"
+          />
         </Link>
 
         <div className="w-full flex items-center justify-end gap-4 lg:gap-10">

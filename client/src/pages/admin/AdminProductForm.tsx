@@ -6,6 +6,44 @@ import api from "../../config/api";
 import toast from "react-hot-toast";
 import PageLoader from "../../components/PageLoader";
 
+const splitList = (value: string) =>
+  value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const joinList = (value: unknown) =>
+  Array.isArray(value) ? value.join(", ") : "";
+
+const emptyForm = {
+  name: "",
+  description: "",
+  price: "",
+  originalPrice: "",
+  image: "",
+  category: "",
+  unit: "piece",
+  stock: "",
+  sizes: "",
+  colors: "",
+  fits: "",
+  patterns: "",
+  rises: "",
+  stretches: "",
+  lengths: "",
+  closureTypes: "",
+  occasions: "",
+  brands: "",
+  materials: "",
+  washes: "",
+  collarTypes: "",
+  sleeveLengths: "",
+  pocketStyles: "",
+  tags: "",
+};
+
+type FormState = typeof emptyForm;
+
 export default function AdminProductForm() {
   const { id } = useParams();
   const isEdit = Boolean(id);
@@ -16,17 +54,7 @@ export default function AdminProductForm() {
   const [saving, setSaving] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    originalPrice: "",
-    image: "",
-    category: "",
-    unit: "",
-    stock: "",
-    isOrganic: false,
-  });
+  const [formData, setFormData] = useState<FormState>(emptyForm);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,16 +62,32 @@ export default function AdminProductForm() {
         if (isEdit) {
           const { data: prodData } = await api.get(`/products/${id}`);
           const p = prodData.product;
+
           setFormData({
-            name: p.name,
-            description: p.description,
-            price: p.price.toString(),
+            name: p.name ?? "",
+            description: p.description ?? "",
+            price: p.price?.toString() ?? "",
             originalPrice: p.originalPrice ? p.originalPrice.toString() : "",
-            image: p.image,
-            category: p.category,
-            unit: p.unit,
-            stock: p.stock.toString(),
-            isOrganic: p.isOrganic,
+            image: p.image ?? "",
+            category: p.category ?? "",
+            unit: p.unit ?? "piece",
+            stock: p.stock?.toString() ?? "",
+            sizes: joinList(p.sizes),
+            colors: joinList(p.colors),
+            fits: joinList(p.fits),
+            patterns: joinList(p.patterns),
+            rises: joinList(p.rises),
+            stretches: joinList(p.stretches),
+            lengths: joinList(p.lengths),
+            closureTypes: joinList(p.closureTypes),
+            occasions: joinList(p.occasions),
+            brands: joinList(p.brands),
+            materials: joinList(p.materials),
+            washes: joinList(p.washes),
+            collarTypes: joinList(p.collarTypes),
+            sleeveLengths: joinList(p.sleeveLengths),
+            pocketStyles: joinList(p.pocketStyles),
+            tags: joinList(p.tags),
           });
         }
       } catch (error: any) {
@@ -52,14 +96,17 @@ export default function AdminProductForm() {
         setLoading(false);
       }
     };
+
     fetchData();
   }, [id, isEdit]);
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setSaving(true);
+
     try {
       let finalImageUrl = formData.image;
+
       if (imageFile) {
         const formDataUpload = new FormData();
         formDataUpload.append("image", imageFile);
@@ -80,7 +127,23 @@ export default function AdminProductForm() {
         originalPrice: formData.originalPrice
           ? Number(formData.originalPrice)
           : 0,
-        stock: formData.stock,
+        stock: Number(formData.stock),
+        sizes: splitList(formData.sizes),
+        colors: splitList(formData.colors),
+        fits: splitList(formData.fits),
+        patterns: splitList(formData.patterns),
+        rises: splitList(formData.rises),
+        stretches: splitList(formData.stretches),
+        lengths: splitList(formData.lengths),
+        closureTypes: splitList(formData.closureTypes),
+        occasions: splitList(formData.occasions),
+        brands: splitList(formData.brands),
+        materials: splitList(formData.materials),
+        washes: splitList(formData.washes),
+        collarTypes: splitList(formData.collarTypes),
+        sleeveLengths: splitList(formData.sleeveLengths),
+        pocketStyles: splitList(formData.pocketStyles),
+        tags: splitList(formData.tags),
       };
 
       if (isEdit) {
@@ -90,6 +153,7 @@ export default function AdminProductForm() {
         await api.post("/products", payload);
         toast.success("Product created successfully");
       }
+
       navigate("/admin/products");
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to save product");
@@ -97,6 +161,40 @@ export default function AdminProductForm() {
       setSaving(false);
     }
   };
+
+  const setField = (key: keyof FormState, value: string) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const TextField = ({
+    label,
+    value,
+    onChange,
+    placeholder,
+    type = "text",
+    required = false,
+  }: {
+    label: string;
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+    type?: string;
+    required?: boolean;
+  }) => (
+    <div>
+      <label className="block text-sm font-medium text-zinc-700 mb-2">
+        {label}
+      </label>
+      <input
+        required={required}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all"
+      />
+    </div>
+  );
 
   return (
     <>
@@ -112,173 +210,295 @@ export default function AdminProductForm() {
             {isEdit ? "Edit Product" : "New Product"}
           </h2>
         </div>
+
         {loading ? (
           <PageLoader />
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Name
-                </label>
-                <input
-                  required
-                  type="text"
-                  aria-label="Product name"
+          <form onSubmit={handleSubmit} className="p-6 space-y-8">
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-app-green">
+                Core Details
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <TextField
+                  label="Name"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Category
-                </label>
-                <select
+                  onChange={(value) => setField("name", value)}
                   required
-                  aria-label="Product category"
-                  value={formData.category}
-                  onChange={(e) =>
-                    setFormData({ ...formData, category: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all bg-white"
-                >
-                  <option value="">Select a category</option>
-                  {categoriesData.map((c) => (
-                    <option key={c.slug} value={c.slug}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Price ($)
-                </label>
-                <input
-                  required
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  aria-label="Product price in dollars"
-                  value={formData.price}
-                  onChange={(e) =>
-                    setFormData({ ...formData, price: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all"
                 />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Original Price ($) - Optional
-                </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  aria-label="Original price in dollars (optional)"
-                  value={formData.originalPrice}
-                  onChange={(e) =>
-                    setFormData({ ...formData, originalPrice: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Unit
-                </label>
-                <input
-                  required
-                  type="text"
-                  placeholder="e.g., kg, piece, liter"
-                  aria-label="Product unit"
-                  value={formData.unit}
-                  onChange={(e) =>
-                    setFormData({ ...formData, unit: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Stock
-                </label>
-                <input
-                  required
-                  type="number"
-                  min="0"
-                  aria-label="Product stock quantity"
-                  value={formData.stock}
-                  onChange={(e) =>
-                    setFormData({ ...formData, stock: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all"
-                />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Product Image
-                </label>
-                <div className="flex items-center gap-4">
-                  {(imageFile || formData.image) && (
-                    <div className="size-16 rounded-lg border border-zinc-200 overflow-hidden shrink-0 bg-app-cream">
-                      <img
-                        src={
-                          imageFile
-                            ? URL.createObjectURL(imageFile)
-                            : formData.image
-                        }
-                        alt="Preview"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    aria-label="Upload product image"
-                    onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-                    className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-app-orange file:text-white hover:file:bg-orange-600 cursor-pointer"
-                  />
+
+                <div>
+                  <label className="block text-sm font-medium text-zinc-700 mb-2">
+                    Category
+                  </label>
+                  <select
+                    required
+                    value={formData.category}
+                    onChange={(e) => setField("category", e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all bg-white"
+                  >
+                    <option value="">Select a category</option>
+                    {categoriesData.map((c) => (
+                      <option key={c.slug} value={c.slug}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
-                  Description
-                </label>
-                <textarea
+
+                <TextField
+                  label="Price"
+                  type="number"
+                  value={formData.price}
+                  onChange={(value) => setField("price", value)}
                   required
-                  rows={4}
-                  aria-label="Product description"
-                  value={formData.description}
-                  onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all resize-none"
                 />
-              </div>
-              <div className="flex items-center gap-3">
-                <label
-                  htmlFor="isOrganic"
-                  className="text-sm font-medium text-zinc-700 cursor-pointer"
-                >
-                  Organic
-                </label>
-                <input
-                  type="checkbox"
-                  id="isOrganic"
-                  aria-label="Mark product as organic"
-                  checked={formData.isOrganic}
-                  onChange={(e) =>
-                    setFormData({ ...formData, isOrganic: e.target.checked })
-                  }
-                  className="size-5 text-app-green rounded border-zinc-300 focus:ring-app-green cursor-pointer"
+
+                <TextField
+                  label="Original Price - Optional"
+                  type="number"
+                  value={formData.originalPrice}
+                  onChange={(value) => setField("originalPrice", value)}
+                />
+
+                <TextField
+                  label="Unit"
+                  value={formData.unit}
+                  onChange={(value) => setField("unit", value)}
+                  placeholder="e.g., piece"
+                  required
+                />
+
+                <TextField
+                  label="Stock"
+                  type="number"
+                  value={formData.stock}
+                  onChange={(value) => setField("stock", value)}
+                  required
                 />
               </div>
             </div>
+
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-app-green">
+                Product Image & Description
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-zinc-700 mb-2">
+                    Product Image
+                  </label>
+                  <div className="flex items-center gap-4">
+                    {(imageFile || formData.image) && (
+                      <div className="size-16 rounded-lg border border-zinc-200 overflow-hidden shrink-0 bg-app-cream">
+                        <img
+                          src={
+                            imageFile
+                              ? URL.createObjectURL(imageFile)
+                              : formData.image
+                          }
+                          alt="Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) =>
+                        setImageFile(e.target.files?.[0] || null)
+                      }
+                      className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-app-orange file:text-white hover:file:bg-orange-600 cursor-pointer"
+                    />
+                  </div>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-zinc-700 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={formData.description}
+                    onChange={(e) => setField("description", e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green focus:ring-1 focus:ring-app-green outline-none transition-all resize-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-app-green">
+                Shared Clothing Filters
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <TextField
+                  label="Sizes"
+                  value={formData.sizes}
+                  onChange={(value) => setField("sizes", value)}
+                  placeholder="XS, S, M, L"
+                />
+
+                <TextField
+                  label="Colors"
+                  value={formData.colors}
+                  onChange={(value) => setField("colors", value)}
+                  placeholder="Black, Blue, White"
+                />
+
+                <TextField
+                  label="Fits"
+                  value={formData.fits}
+                  onChange={(value) => setField("fits", value)}
+                  placeholder="Slim Fit, Regular Fit"
+                />
+
+                <TextField
+                  label="Patterns"
+                  value={formData.patterns}
+                  onChange={(value) => setField("patterns", value)}
+                  placeholder="Plain, Checks, Stripes"
+                />
+
+                <TextField
+                  label="Occasions"
+                  value={formData.occasions}
+                  onChange={(value) => setField("occasions", value)}
+                  placeholder="Casual, Formal"
+                />
+
+                <TextField
+                  label="Brands"
+                  value={formData.brands}
+                  onChange={(value) => setField("brands", value)}
+                  placeholder="Levi's, Jack & Jones"
+                />
+
+                <TextField
+                  label="Materials"
+                  value={formData.materials}
+                  onChange={(value) => setField("materials", value)}
+                  placeholder="Cotton, Linen, Denim Blend"
+                />
+
+                <TextField
+                  label="Quick Filters / Tags"
+                  value={formData.tags}
+                  onChange={(value) => setField("tags", value)}
+                  placeholder="New, Formal, Relaxed, Slim"
+                />
+              </div>
+            </div>
+
+            {formData.category === "shirts" && (
+              <div className="space-y-4">
+                <h3 className="text-sm font-semibold text-app-green">
+                  Shirt-Specific Filters
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <TextField
+                    label="Collar Types"
+                    value={formData.collarTypes}
+                    onChange={(value) => setField("collarTypes", value)}
+                    placeholder="Spread Collar, Mandarin Collar"
+                  />
+
+                  <TextField
+                    label="Sleeve Lengths"
+                    value={formData.sleeveLengths}
+                    onChange={(value) => setField("sleeveLengths", value)}
+                    placeholder="Full Sleeve, Half Sleeve"
+                  />
+                </div>
+              </div>
+            )}
+
+            {formData.category === "jeans" && (
+              <div className="space-y-4">
+                <h3 className="text-sm font-semibold text-app-green">
+                  Jeans-Specific Filters
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <TextField
+                    label="Rises"
+                    value={formData.rises}
+                    onChange={(value) => setField("rises", value)}
+                    placeholder="Low Rise, Mid Rise"
+                  />
+
+                  <TextField
+                    label="Stretches"
+                    value={formData.stretches}
+                    onChange={(value) => setField("stretches", value)}
+                    placeholder="Stretchable, Non-Stretchable"
+                  />
+
+                  <TextField
+                    label="Lengths"
+                    value={formData.lengths}
+                    onChange={(value) => setField("lengths", value)}
+                    placeholder="Cropped, Full Length"
+                  />
+
+                  <TextField
+                    label="Closure Types"
+                    value={formData.closureTypes}
+                    onChange={(value) => setField("closureTypes", value)}
+                    placeholder="Zip Fly, Button Fly"
+                  />
+
+                  <TextField
+                    label="Washes"
+                    value={formData.washes}
+                    onChange={(value) => setField("washes", value)}
+                    placeholder="Light Wash, Dark Wash"
+                  />
+                </div>
+              </div>
+            )}
+
+            {formData.category === "trousers" && (
+              <div className="space-y-4">
+                <h3 className="text-sm font-semibold text-app-green">
+                  Trouser-Specific Filters
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <TextField
+                    label="Rises"
+                    value={formData.rises}
+                    onChange={(value) => setField("rises", value)}
+                    placeholder="Low Rise, Mid Rise"
+                  />
+
+                  <TextField
+                    label="Lengths"
+                    value={formData.lengths}
+                    onChange={(value) => setField("lengths", value)}
+                    placeholder="Ankle Length, Full Length"
+                  />
+
+                  <TextField
+                    label="Closure Types"
+                    value={formData.closureTypes}
+                    onChange={(value) => setField("closureTypes", value)}
+                    placeholder="Button Closure, Elastic Waist"
+                  />
+
+                  <TextField
+                    label="Pocket Styles"
+                    value={formData.pocketStyles}
+                    onChange={(value) => setField("pocketStyles", value)}
+                    placeholder="Flat Front, Pleated, Cargo"
+                  />
+                </div>
+              </div>
+            )}
 
             <div className="pt-6 border-t border-app-border flex justify-end">
               <button

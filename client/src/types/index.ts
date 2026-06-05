@@ -42,7 +42,26 @@ export interface Product {
   rating: number;
   reviewCount: number;
   discount: number;
+
+  sizes: string[];
+  colors: string[];
+  fits: string[];
+  patterns: string[];
+  rises: string[];
+  stretches: string[];
+  lengths: string[];
+  closureTypes: string[];
+  occasions: string[];
+  brands: string[];
+  materials: string[];
+  washes: string[];
+  collarTypes: string[];
+  sleeveLengths: string[];
+  pocketStyles: string[];
+  tags: string[];
+
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface CartItem {

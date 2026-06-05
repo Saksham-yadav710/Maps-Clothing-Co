@@ -25,7 +25,7 @@ const PopularProducts = () => {
   }, []);
 
   return (
-    <section className="pb-16">
+    <section className="pb-16 mt-20">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

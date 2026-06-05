@@ -1,11 +1,11 @@
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../generated/client"
 }
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -50,6 +50,24 @@ model Product {
   isOrganic     Boolean? @default(false)
   rating        Float?   @default(0)
   reviewCount   Int?     @default(0)
+
+  sizes         String[] @default([])
+  colors        String[] @default([])
+  fits          String[] @default([])
+  patterns      String[] @default([])
+  rises         String[] @default([])
+  stretches     String[] @default([])
+  lengths       String[] @default([])
+  closureTypes  String[] @default([])
+  occasions     String[] @default([])
+  brands        String[] @default([])
+  materials     String[] @default([])
+  washes        String[] @default([])
+  collarTypes   String[] @default([])
+  sleeveLengths String[] @default([])
+  pocketStyles  String[] @default([])
+  tags          String[] @default([])
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { prisma } from "../config/prisma.js";
-import type { Prisma } from "../generated/prisma/client.js";
+import type { Prisma } from "../generated/client/client.js";
 import { inngest } from "../inngest/index.js";
 
 //create order
@@ -60,6 +60,11 @@ export const createOrder = async (req: Request, res: Response) => {
   const orderItems = Array.from(quantityByProduct.entries()).map(
     ([productId, quantity]) => {
       const dbProduct = productMap[productId];
+
+      if (!dbProduct) {
+        throw new Error(`Product ${productId} not found`);
+      }
+
       return {
         product: dbProduct.id,
         name: dbProduct.name,

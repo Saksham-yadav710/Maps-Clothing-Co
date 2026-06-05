@@ -1,8 +1,8 @@
 import { cron, Inngest, type InngestFunction } from "inngest";
 import { prisma } from "../config/prisma.js";
 import { sendEmail } from "../config/sendEmail_Resend.js";
-import type { Product, User } from "../generated/prisma/client.js";
-import { OrderScalarFieldEnum } from "../generated/prisma/internal/prismaNamespace.js";
+import type { Product, User } from "../generated/client/client.js";
+import { OrderScalarFieldEnum } from "../generated/client/internal/prismaNamespace.js";
 
 type MonthlyOffersData = {
   deals: Product[];

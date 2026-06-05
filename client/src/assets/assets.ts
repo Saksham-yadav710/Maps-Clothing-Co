@@ -1,7 +1,7 @@
 import {
   TruckIcon,
-  LeafIcon,
-  ClockIcon,
+  AwardIcon,
+  RotateCcwIcon,
   ShieldCheckIcon,
   MapPinIcon,
   PhoneIcon,
@@ -9,67 +9,71 @@ import {
 } from "lucide-react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import hero_bg from "./hero_bg.webp";
 import delivery_truck from "./delivery_truck.svg";
-import fruits_vegetables from "./fruits_vegetables.webp";
-import dairy_eggs from "./dairy_eggs.webp";
-import bakery from "./bakery.webp";
-import drinks from "./drinks.webp";
-import pantry_staples from "./pantry_staples.webp";
-import snacks from "./snacks.webp";
-import frozen_foods from "./frozen_foods.webp";
-import personal_care from "./personal_care.webp";
-import baby_care from "./baby_care.webp";
-import meat_seafood from "./meat_seafood.webp";
+
+import heroImage from "./hero-image.jpg";
+import img1 from "./img1.jpg";
+import img2 from "./img2.jpg";
+import img3 from "./img3.jpg";
+import img4 from "./img4.jpg";
+import img5 from "./img5.jpg";
+import img6 from "./img6.jpg";
+import img7 from "./img7.jpg";
+import img8 from "./img8.jpg";
 
 export const assets = {
   delivery_truck,
-  hero_bg,
 };
+
+export const heroSlides = [img1, img2, img3, img4, img5, img6, img7, img8];
 
 export const categoriesData = [
   {
-    slug: "fruits-vegetables",
-    name: "Fruits & Vegetables",
-    image: fruits_vegetables,
+    slug: "shirts",
+    name: "Shirts",
+    image:
+      "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=200&q=80",
   },
-  { slug: "personal-care", name: "Personal Care", image: personal_care },
-  { slug: "pantry-staples", name: "Pantry Staples", image: pantry_staples },
-  { slug: "bakery", name: "Bakery", image: bakery },
-  { slug: "beverages", name: "Beverages", image: drinks },
-  { slug: "meat-seafood", name: "Meat & Seafood", image: meat_seafood },
-  { slug: "snacks", name: "Snacks", image: snacks },
-  { slug: "frozen-foods", name: "Frozen Foods", image: frozen_foods },
-  { slug: "baby-care", name: "Baby Care", image: baby_care },
-  { slug: "dairy-eggs", name: "Dairy & Eggs", image: dairy_eggs },
+  {
+    slug: "jeans",
+    name: "Jeans",
+    image:
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&q=80",
+  },
+  {
+    slug: "trousers",
+    name: "Trousers",
+    image:
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&q=80",
+  },
 ];
 
 export const heroSectionData = {
+  hero_image: heroImage,
   description:
-    "Fresh, organic groceries delivered from local farms to your doorstep. Quality you can taste, convenience you deserve.",
-  hero_image: hero_bg,
+    "Welcome to MAPS : where quality meets affordability, style meets value, and every customer can truly Wear Confidence, Spend Smart.",
   hero_features: [
-    { icon: TruckIcon, title: "Free Delivery", desc: "Orders over $20" },
-    { icon: LeafIcon, title: "100% Organic", desc: "Certified products" },
-    { icon: ClockIcon, title: "Same Day", desc: "Express delivery" },
+    { icon: TruckIcon, title: "Free Delivery", desc: "Orders over $50" },
+    { icon: AwardIcon, title: "Premium Denim", desc: "Certified quality" },
+    { icon: RotateCcwIcon, title: "Easy Returns", desc: "30-day policy" },
     { icon: ShieldCheckIcon, title: "Secure Pay", desc: "Safe checkout" },
   ],
 };
 
 export const deliveryPartnerLoginImage =
-  "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=200";
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200";
 
 export const appPromoBannerData = {
-  title: "Get fresh groceries in minutes",
+  title: "Wear Confidence, Spend Smart.",
   description:
-    "Download the FreshCart app for exclusive deals, real-time tracking, and the freshest selection delivered right to your door.",
+    "Download the MAPS app to explore our diverse collection of high-quality men's fashion at prices that make sense. Enjoy seamless shopping and exclusive deals right in your pocket.",
 };
 
 export const footerData = {
   brand: {
-    name: "FreshCart",
+    name: "MAPS",
     description:
-      "Bringing fresh, organic groceries straight from local farms to your doorstep. Nourish your home with Earth's finest.",
+      "At MAPS, we believe that great style shouldn't come with a premium price tag. Our mission is simple to bring high-quality men's fashion to every wardrobe.",
     socials: [
       { icon: FaFacebookF, link: "#" },
       { icon: FaXTwitter, link: "#" },
@@ -82,7 +86,7 @@ export const footerData = {
       title: "Quick Links",
       links: [
         { label: "All Products", to: "/products" },
-        { label: "Flash Deals", to: "/deals" },
+        { label: "New Arrivals", to: "/deals" },
         { label: "Track Order", to: "/orders" },
         { label: "Delivery Partner", to: "/delivery" },
       ],
@@ -99,13 +103,13 @@ export const footerData = {
   ],
 
   contact: [
-    { icon: MapPinIcon, text: "123 Green Valley Rd, Portland" },
-    { icon: PhoneIcon, text: "+1 (111) 123-4567" },
-    { icon: MailIcon, text: "hello@example.com" },
+    { icon: MapPinIcon, text: "12 Thread Lane, New Delhi" },
+    { icon: PhoneIcon, text: "+91 98765 43210" },
+    { icon: MailIcon, text: "hello@maps.com" },
   ],
 
   bottom: {
-    copyright: "© 2026 Greatstack. All rights reserved.",
+    copyright: "© 2026 MAPS. All rights reserved.",
     links: [
       { label: "Privacy Policy", href: "#" },
       { label: "Terms of Service", href: "#" },
@@ -132,7 +136,7 @@ export const dummyProducts = [];
 export const dummyAdminDashboardData = {
   totalOrders: 1,
   totalUsers: 3,
-  totalProducts: 27,
+  totalProducts: 50,
   outOfStock: 0,
   totalPartners: 2,
   recentOrders: [
@@ -160,30 +164,30 @@ export const dummyAdminDashboardData = {
       items: [
         {
           product: "69c22613ae75a98c7cd13b3b",
-          name: "Butter Croissant 100g",
+          name: "Oxford Button-Down Shirt",
           image:
-            "https://raw.githubusercontent.com/avinashdm/gs-images/main/greencart/zvoeqbvrbrt7atqj0dbu.png",
-          price: 45,
+            "https://images.unsplash.com/photo-1598033129183-c4f50c736c10?w=500&q=80",
+          price: 1499,
           quantity: 2,
-          unit: "100g",
+          unit: "piece",
           id: "69d366617ed7e54198d67dad",
         },
         {
           product: "69c22613ae75a98c7cd13b36",
-          name: "Barley 1kg",
+          name: "Classic Slim Fit Dark Wash Jeans",
           image:
-            "https://raw.githubusercontent.com/avinashdm/gs-images/main/greencart/spb5sgy8g24rned9nwog.png",
-          price: 140,
+            "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&q=80",
+          price: 1999,
           quantity: 1,
-          unit: "1kg",
+          unit: "piece",
           id: "69d366617ed7e54198d67dae",
         },
       ],
       paymentMethod: "cash",
-      subtotal: 230,
+      subtotal: 4997,
       deliveryFee: 0,
-      tax: 18.4,
-      total: 248.4,
+      tax: 399.76,
+      total: 5396.76,
       status: "Delivered",
       statusHistory: [
         {
@@ -283,30 +287,30 @@ export const dummyDashboardOrdersData = [
     items: [
       {
         product: "69c22613ae75a98c7cd13b3b",
-        name: "Butter Croissant 100g",
+        name: "Slim Fit Linen Shirt",
         image:
-          "https://raw.githubusercontent.com/avinashdm/gs-images/main/greencart/zvoeqbvrbrt7atqj0dbu.png",
-        price: 45,
+          "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80",
+        price: 1799,
         quantity: 2,
-        unit: "100g",
+        unit: "piece",
         id: "69d366617ed7e54198d67dad",
       },
       {
         product: "69c22613ae75a98c7cd13b36",
-        name: "Barley 1kg",
+        name: "Slim Fit Chino Trousers",
         image:
-          "https://raw.githubusercontent.com/avinashdm/gs-images/main/greencart/spb5sgy8g24rned9nwog.png",
-        price: 140,
+          "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500&q=80",
+        price: 1499,
         quantity: 1,
-        unit: "1kg",
+        unit: "piece",
         id: "69d366617ed7e54198d67dae",
       },
     ],
     paymentMethod: "cash",
-    subtotal: 230,
+    subtotal: 5097,
     deliveryFee: 0,
-    tax: 18.4,
-    total: 248.4,
+    tax: 407.76,
+    total: 5504.76,
     status: "Delivered",
     statusHistory: [
       {
@@ -376,30 +380,30 @@ export const dummyDashboardOrdersData = [
     items: [
       {
         product: "69c22613ae75a98c7cd13b3b",
-        name: "Butter Croissant 100g",
+        name: "Ripped Distressed Slim Jeans",
         image:
-          "https://raw.githubusercontent.com/avinashdm/gs-images/main/greencart/zvoeqbvrbrt7atqj0dbu.png",
-        price: 45,
-        quantity: 2,
-        unit: "100g",
+          "https://images.unsplash.com/photo-1475178626620-a4d074967571?w=500&q=80",
+        price: 2199,
+        quantity: 1,
+        unit: "piece",
         id: "69d366617ed7e54198d67dad",
       },
       {
         product: "69c22613ae75a98c7cd13b36",
-        name: "Barley 1kg",
+        name: "Elastic Waist Jogger Trousers",
         image:
-          "https://raw.githubusercontent.com/avinashdm/gs-images/main/greencart/spb5sgy8g24rned9nwog.png",
-        price: 140,
-        quantity: 1,
-        unit: "1kg",
+          "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&q=80",
+        price: 999,
+        quantity: 2,
+        unit: "piece",
         id: "69d366617ed7e54198d67dae",
       },
     ],
     paymentMethod: "cash",
-    subtotal: 230,
+    subtotal: 4197,
     deliveryFee: 0,
-    tax: 18.4,
-    total: 248.4,
+    tax: 335.76,
+    total: 4532.76,
     status: "Out for Delivery",
     statusHistory: [
       {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { type Product } from "../types";
 import { categoriesData } from "../assets/assets";
@@ -9,6 +9,25 @@ import api from "../config/api";
 import toast from "react-hot-toast";
 import PageLoader from "../components/PageLoader";
 
+const MULTI_FILTER_KEYS = [
+  "sizes",
+  "colors",
+  "fits",
+  "patterns",
+  "rises",
+  "stretches",
+  "lengths",
+  "closureTypes",
+  "occasions",
+  "brands",
+  "materials",
+  "washes",
+  "collarTypes",
+  "sleeveLengths",
+  "pocketStyles",
+  "tags",
+] as const;
+
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,54 +36,91 @@ const Products = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const category = searchParams.get("category") || "";
-  const organic = searchParams.get("organic") || "";
   const sort = searchParams.get("sort") || "";
   const page = Number(searchParams.get("page")) || 1;
   const minPrice = searchParams.get("minPrice") || "";
   const maxPrice = searchParams.get("maxPrice") || "";
 
+  const selectedFilters = useMemo(() => {
+    return MULTI_FILTER_KEYS.reduce<Record<string, string[]>>((acc, key) => {
+      const raw = searchParams.get(key) || "";
+      acc[key] = raw
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+      return acc;
+    }, {});
+  }, [searchParams]);
+
   const fetchProducts = async () => {
     setLoading(true);
 
     try {
-      const params = new URLSearchParams();
-      if (category) params.set("category", category);
-      if (organic) params.set("organic", organic);
-      if (sort) params.set("sort", sort);
-      if (minPrice) params.set("minPrice", minPrice);
-      if (maxPrice) params.set("maxPrice", maxPrice);
+      const params = new URLSearchParams(searchParams);
       params.set("page", String(page));
       params.set("limit", "12");
 
       const { data } = await api.get(`/products?${params.toString()}`);
       setProducts(data.products);
-      setTotalPages(data.pages);
+      setTotalPages(data.pages || 1);
     } catch (error: any) {
       toast.error(error?.response?.data?.message || error?.message);
     } finally {
       setLoading(false);
     }
-    setLoading(false);
   };
 
   const updateFilter = (key: string, value: string) => {
     const newParams = new URLSearchParams(searchParams);
+
     if (value) {
       newParams.set(key, value);
     } else {
       newParams.delete(key);
     }
+
+    if (key === "category") {
+      MULTI_FILTER_KEYS.forEach((filterKey) => newParams.delete(filterKey));
+    }
+
     if (key !== "page") newParams.delete("page");
     setSearchParams(newParams);
   };
 
+  const toggleMultiFilter = (key: string, value: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    const current = (newParams.get(key) || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    const next = current.includes(value)
+      ? current.filter((item) => item !== value)
+      : [...current, value];
+
+    if (next.length > 0) {
+      newParams.set(key, next.join(","));
+    } else {
+      newParams.delete(key);
+    }
+
+    newParams.delete("page");
+    setSearchParams(newParams);
+  };
+
   const clearFilters = () => setSearchParams({});
+
   const activeCategory = categoriesData.find((c) => c.slug === category);
-  const hasFilters = category || organic || minPrice || maxPrice;
+  const hasFilters =
+    Boolean(category) ||
+    Boolean(minPrice) ||
+    Boolean(maxPrice) ||
+    MULTI_FILTER_KEYS.some((key) => (selectedFilters[key] || []).length > 0);
 
   useEffect(() => {
     fetchProducts();
-  }, [category, organic, sort, page, minPrice, maxPrice]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, sort, page, minPrice, maxPrice, searchParams.toString()]);
 
   return (
     <div className="min-h-screen bg-app-cream">
@@ -87,11 +143,12 @@ const Products = () => {
               <FilterPanel
                 categories={categoriesData}
                 category={category}
-                organic={organic}
                 minPrice={minPrice}
                 maxPrice={maxPrice}
+                selectedFilters={selectedFilters}
                 clearFilters={clearFilters}
                 updateFilter={updateFilter}
+                toggleMultiFilter={toggleMultiFilter}
                 hasFilters={hasFilters}
               />
             </div>
@@ -177,7 +234,11 @@ const Products = () => {
                       updateFilter("page", String(i + 1));
                       scrollTo(0, 0);
                     }}
-                    className={`size-9 rounded-lg text-sm font-medium transition-colors ${page === i + 1 ? "bg-green text-white" : "bg-white text-app-text-light hover:bg-app-cream"}`}
+                    className={`size-9 rounded-lg text-sm font-medium transition-colors ${
+                      page === i + 1
+                        ? "bg-green text-white"
+                        : "bg-white text-app-text-light hover:bg-app-cream"
+                    }`}
                   >
                     {i + 1}
                   </button>
@@ -211,11 +272,12 @@ const Products = () => {
               <FilterPanel
                 categories={categoriesData}
                 category={category}
-                organic={organic}
                 minPrice={minPrice}
                 maxPrice={maxPrice}
+                selectedFilters={selectedFilters}
                 clearFilters={clearFilters}
                 updateFilter={updateFilter}
+                toggleMultiFilter={toggleMultiFilter}
                 hasFilters={hasFilters}
               />
             </div>
