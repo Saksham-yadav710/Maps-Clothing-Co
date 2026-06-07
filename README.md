@@ -1,8 +1,10 @@
 <div align="center">
 
-# 🛒 FreshCart — Full-Stack Grocery Delivery App
+# 👕 MAPS Clothing Co. — Premium Full-Stack E-Commerce Platform
 
-A modern, full-featured grocery delivery platform built with React, Node.js, PostgreSQL, and real-time background automation.
+### *Wear Confidence, Spend Smart*
+
+A modern, high-performance, and visually stunning men's fashion e-commerce platform built with React 19, TypeScript, Express, Prisma, and PostgreSQL.
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
@@ -19,300 +21,226 @@ A modern, full-featured grocery delivery platform built with React, Node.js, Pos
 
 | Area | Highlights |
 |---|---|
-| 🛍️ Shopping | Product catalog, search, filters, flash deals, cart |
-| 👤 Auth | JWT-based register/login, admin role detection |
-| 📦 Orders | Full order lifecycle, COD & card payment, status history |
-| 🚴 Delivery | Rider portal, OTP delivery confirmation, live location |
-| 🛠️ Admin | Dashboard stats, product/order/partner management |
-| 🤖 Automation | Auto-assign riders, low-stock alerts, monthly promo emails |
-| 🗺️ Maps | Real-time delivery tracking with Leaflet maps |
-| 📧 Email | Transactional & promotional emails via Resend |
-| 🖼️ Media | Image uploads via Cloudinary |
-| ♿ Accessibility | WCAG compliant forms with aria-labels |
+| 🛍️ **Shopping Experience** | Curated catalog of shirts, jeans, trousers; instant text search; accordion-style category, price, and fit filters; size and color selectors; slide-out shopping cart. |
+| 👤 **Flexible Authentication** | Secure JWT-based register and login flows with separate route guards for Customers, Administrators, and Delivery Partners. |
+| 📦 **Order Lifecycle** | Seamless checkout, transaction-safe database updates, Cash on Delivery (COD) & card payment options, and instant order history. |
+| 🚴 **Rider Portal** | Dedicated portal for delivery partners: view active deliveries, update status (Packed, Out for Delivery), update live coordinates, and complete orders via secure OTP. |
+| 🛠️ **Admin Control Panel** | Comprehensive toolset to manage the store catalog, review details, toggle active delivery partners, customize banner notifications, and track analytics. |
+| 📈 **Revenue Analytics** | Visual stats dashboard for admins showing total revenue generated, orders placed, orders delivered, and orders cancelled over custom intervals (1D, 3D, 1W, 1M, 3M, 6M, 9M, 1Y, and All-Time). |
+| 📢 **Dynamic Promo Banner** | Real-time banner settings in the admin panel to update/dismiss the global app-wide promotion marquee text and visibility. |
+| 🤖 **Background Automation** | Powered by **Inngest** for auto-assigning available riders (after a 5-minute cooldown), generating low-stock email alerts (< 10 units), and sending monthly promotional emails. |
+| 🗺️ **Live Map Tracking** | Real-time rider location tracking on interactive Leaflet maps with status timelines. |
+| 📧 **Email Notifications** | Styled transactional and marketing newsletters sent via Resend and Nodemailer. |
+| 🖼️ **Media Hosting** | Fast and secure cloud image uploads via Cloudinary. |
 
 ---
 
 ## 🗂️ Project Structure
 
 ```
-ecommerce/
-├── client/          # React + Vite frontend
-└── server/          # Express + Prisma backend
+Maps-Clothing-Co-main/
+├── client/          # React 19 + Vite frontend application
+└── server/          # Express + Prisma + PostgreSQL backend service
 ```
 
 ---
 
-## 🖥️ Frontend (client)
+## 🖥️ Frontend Architecture (`client`)
 
 Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Vite**.
 
-### Pages & Routing
+### Routing & Views (`react-router-dom`)
 
-| Route | Page | Description |
+| Route | View | Description |
 |---|---|---|
-| `/` | Home | Hero, categories, popular products, newsletter, app promo banner |
-| `/products` | Products | Full catalog with filter panel (category, price, organic) |
-| `/products/:id` | Product Detail | Product info, add to cart |
-| `/search` | Search Results | Live search across products |
-| `/flash-deals` | Flash Deals | Discounted / on-sale products |
-| `/checkout` | Checkout | 3-step flow: address → payment → review |
-| `/orders` | My Orders | Order history with status filter |
-| `/orders/:id` | Order Tracking | Live map + OTP display + status timeline |
-| `/addresses` | Addresses | Manage saved delivery addresses |
-| `/login` | Login / Register | Auth forms |
-| `/admin/*` | Admin Panel | Protected admin area |
-| `/delivery/*` | Delivery Portal | Protected rider area |
+| `/` | Home | Hero carousel, featured categories, popular products, and newsletter. |
+| `/products` | Catalog | Grid of clothes with an accordion filter panel (category, price range, etc.). |
+| `/products/:id` | Product Detail | In-depth description, size/color selectors, inventory checks, and cart CTA. |
+| `/search` | Search | Displays search queries dynamically. |
+| `/checkout` | Checkout | Step-by-step address selection, payment type, and final order review. |
+| `/orders` | Order History | Customer's past orders with order status filters. |
+| `/orders/:id` | Order Details | Live Leaflet map tracking, delivery status timeline, and order OTP. |
+| `/addresses` | Addresses | Save, update, and manage default shipping locations. |
+| `/login` | Auth | Integrated login and signup screen. |
+| `/admin/*` | Admin Panel | Protected workspace for store administration. |
+| `/delivery/*` | Rider Portal | Protected dashboard for delivery partners. |
 
 ### Key Components
 
-- **Navbar** — cart icon with live count, auth state, search bar
-- **CartSidebar** — slide-in cart with quantity controls and checkout CTA
-- **ProductCard** — product tile with add-to-cart, organic badge, rating
-- **FilterPanel** — category, price range, and organic filters
-- **AddressForm / AddressCard** — geo-tagged address management
-- **LiveMap** — real-time rider location on Leaflet map
-- **OrderTimeLine** — visual status history (Placed → Assigned → Delivered)
-- **OrderOTP** — displays OTP for delivery confirmation
-- **ProtectedRoute** — guards auth, admin, and delivery routes
-
-### Admin Panel (`/admin`)
-
-- **Dashboard** — total orders, users, products, out-of-stock count, recent orders table
-- **Revenue Analytics** — view total revenue, delivered/placed/cancelled order counts filterable by 9 time periods (1D to All Time)
-- **Products** — list, create, edit, delete products with image upload
-- **Orders** — view all orders, update status manually, assign delivery partner
-- **Delivery Partners** — create/update partner profiles, toggle active status
-- **Banner Settings** — dynamically change the global promotional banner text and visibility
-
-### Delivery Portal (`/delivery`)
-
-- **Login** — dedicated rider login
-- **Dashboard** — active and completed deliveries
-- **Delivery Detail** — order info, status update buttons, OTP confirmation modal, cancel modal
+- **Navbar** — Interactive navigation with a search bar, active user indicators, and a slide-out cart sidebar.
+- **FilterPanel** — Accordion-style filters where opening one section (e.g. Categories) automatically collapses other active sections (e.g. Price Range) to keep the catalog clean.
+- **AppPromotionBanner** — Beautiful promo showcase featuring social proof (4.8 stars from 2,000+ happy shoppers) and random Indian faces of men in circle avatars.
+- **AdminDashboard** — Includes high-level KPIs, recent orders, and the **Revenue Analytics** chart.
+- **AdminBanner** — Form inputs where administrators can customize and toggle the global header announcement (delivered dynamically to `Banner.tsx`).
 
 ---
 
-## ⚙️ Backend (server)
+## ⚙️ Backend Services (`server`)
 
 Built with **Express 5**, **TypeScript**, **Prisma ORM**, and **PostgreSQL**.
 
-### Database Models
+### Database Schema (Prisma)
 
-```
-User            — customers (name, email, password, phone, avatar)
-Address         — geo-tagged addresses with lat/lng and default flag
-Product         — catalog (name, price, originalPrice, stock, category, unit, organic, rating)
-Order           — full order (items JSON, shippingAddress JSON, status, statusHistory JSON, liveLocation JSON, OTP, isPaid)
-DeliveryPartner — riders (name, email, password, phone, vehicleType, isActive)
-```
-
-### REST API
-
-#### Auth — `/api/auth`
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/register` | Register new user, returns JWT |
-| POST | `/login` | Login, returns user + JWT |
-
-#### Products — `/api/products`
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/` | Get all products (with filters) |
-| GET | `/:id` | Get single product |
-| POST | `/` | Create product *(admin)* |
-| PUT | `/:id` | Update product *(admin)* |
-| DELETE | `/:id` | Delete product *(admin)* |
-
-#### Orders — `/api/orders`
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/` | Create order (validates stock, calculates totals) |
-| GET | `/` | Get current user's orders |
-| GET | `/all` | Get all orders *(admin)* |
-| GET | `/:id` | Get single order |
-| PUT | `/:id/status` | Update order status *(admin)* |
-| GET | `/:id/location` | Get live delivery location |
-
-#### Addresses — `/api/addresses`
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/` | Get user's addresses |
-| POST | `/` | Add new address (requires lat/lng) |
-| PUT | `/:id` | Update address |
-| DELETE | `/:id` | Delete address |
-
-#### Admin — `/api/admin`
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/stats` | Dashboard stats |
-| GET | `/delivery-partners` | List all partners |
-| POST | `/delivery-partners` | Create partner |
-| PUT | `/delivery-partners/:id` | Update partner |
-| PUT | `/orders/:id/assign` | Assign partner to order |
-
-#### Delivery Partner — `/api/delivery`
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/login` | Rider login |
-| GET | `/my-deliveries` | Get assigned deliveries |
-| GET | `/my-deliveries/:id` | Get delivery detail |
-| PUT | `/my-deliveries/:id/status` | Update status (Packed / Out for Delivery) |
-| PUT | `/my-deliveries/:id/complete` | Complete delivery via OTP |
-| PUT | `/my-deliveries/:id/cancel` | Cancel delivery |
-| PUT | `/my-deliveries/:id/location` | Update live GPS location |
-
-#### Upload — `/api/ipload`
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/` | Upload image to Cloudinary |
+- **`User`** — Customers (name, email, password, phone, profile avatar).
+- **`Address`** — Customer shipping addresses with coordinate fields (`lat`, `lng`) for mapping.
+- **`Product`** — Apparel catalog items containing name, price, original price, description, stock count, category, rating, review count, available sizes, colors, fits, and brand fields.
+- **`Order`** — Stores purchased items, billing calculations, payment methods, delivery state, statuses, status update timelines, live rider location logs, and the 6-digit verification `deliveryOtp`.
+- **`DeliveryPartner`** — Rider records (vehicle type, active duty status, and authentication credentials).
+- **`Banner`** — Single-row configurations storing `text1` (primary alert), `text2` (promo detail), and the Boolean `isVisible`.
 
 ---
 
-### 🤖 Background Automation (Inngest)
+### REST API Reference
 
-Three event-driven / scheduled functions run automatically:
+#### Authentication (`/api/auth`)
+- `POST /register` — Register a customer account (returns JWT).
+- `POST /login` — Standard customer login credentials check (returns user + JWT).
 
-#### 1. Low Stock Alert
-- **Trigger:** `inventory/stock.updated` event (fires after every order)
-- **Action:** If a product's stock drops below **10 units**, sends a styled HTML alert email to all admin addresses
+#### Products (`/api/products`)
+- `GET /` — Search and filter products with pagination.
+- `GET /:id` — Get product specific data (sizes, colors, and stock).
+- `POST /` — Create clothing product *(Admin only)*.
+- `PUT /:id` — Edit product metadata/inventory *(Admin only)*.
+- `DELETE /:id` — Delete product from store *(Admin only)*.
 
-#### 2. Monthly Promo Emails
-- **Trigger:** Cron — `1st of every month at 10:00 AM`
-- **Action:** Fetches top 6 discounted in-stock products, sends a personalized promotional email to every registered user in **batches of 10**
+#### Orders (`/api/orders`)
+- `POST /` — Place order (validates stock, calculates tax, subtotal, and total).
+- `GET /` — List authenticated customer's orders.
+- `GET /all` — Search all database orders *(Admin only)*.
+- `GET /:id` — Get specific order data.
+- `PUT /:id/status` — Modify order status manually *(Admin only)*.
+- `GET /:id/location` — Retrieve live latitude/longitude of assigned delivery partner.
 
-#### 3. Auto-Assign Rider
-- **Trigger:** `order/placed` event
-- **Action:** Waits **5 minutes**, then finds the first available (active + not currently delivering) rider, assigns them to the order, generates a **6-digit OTP**, and updates order status to `Assigned`
+#### Admin Operations (`/api/admin`)
+- `GET /stats` — General dashboard KPIs.
+- `GET /revenue` — Fetch aggregated revenue, placed, delivered, and cancelled orders within selected ranges (1D, 3D, 1W, 1M, 3M, 6M, 9M, 1Y, All-Time).
+- `GET /banner` — Get active banner settings.
+- `PUT /banner` — Update banner text and visibility status.
+- `GET /delivery-partners` — List rider details.
+- `POST /delivery-partners` — Create a new rider profile.
+- `PUT /delivery-partners/:id` — Update rider metadata.
+- `PUT /orders/:id/assign` — Manually assign a partner to an order.
 
----
-
-### 🔐 Auth & Middleware
-
-- **JWT Auth** (`middleware/auth.ts`) — verifies Bearer token, attaches `req.user`
-- **Admin Guard** (`middleware/admin.ts`) — checks email against `ADMIN_EMAILS` env var
-- **Delivery Auth** (`middleware/deliveryAuth.ts`) — verifies delivery-role JWT, attaches `req.partner`
-
----
-
-### 💳 Order Flow
-
-```
-Customer places order
-        ↓
-Stock validated (transaction-safe)
-        ↓
-Order created → "Placed"
-        ↓
-Inngest fires → waits 5 min → auto-assigns rider → "Assigned"
-        ↓
-Rider: Packed → "Packed"
-        ↓
-Rider: Out for Delivery → "Out for Delivery" + live GPS updates
-        ↓
-Customer shares OTP → Rider confirms → "Delivered"
-```
+#### Rider Operations (`/api/delivery`)
+- `POST /login` — Secure partner authentication.
+- `GET /my-deliveries` — List assigned shipments.
+- `GET /my-deliveries/:id` — View specific shipment details.
+- `PUT /my-deliveries/:id/status` — Update status (`Packed`, `Out for Delivery`).
+- `PUT /my-deliveries/:id/complete` — Complete delivery by validating the customer's 6-digit OTP.
+- `PUT /my-deliveries/:id/cancel` — Terminate delivery and revert product stock.
+- `PUT /my-deliveries/:id/location` — Update GPS coordinates in real-time.
 
 ---
 
-## 🚀 Getting Started
+## 🤖 Background Automation (Inngest)
+
+MAPS utilizes three core background tasks to maintain operations smoothly:
+
+1. **Auto-Assign Rider**
+   - **Trigger:** Order status updates to `Placed`.
+   - **Action:** Waits 5 minutes, then automatically selects an active and free delivery partner, links them to the order, generates a **6-digit OTP**, and marks the order as `Assigned`.
+2. **Low Stock Alert**
+   - **Trigger:** Orders that decrement product stock.
+   - **Action:** Checks if a modified product's stock drops below **10 units**. If so, compiles a beautiful HTML notification and emails the administrators.
+3. **Monthly Newsletter Marketing**
+   - **Trigger:** Automated Cron trigger (`0 10 1 * *` - First of every month at 10:00 AM).
+   - **Action:** Selects the top 6 discounted in-stock items, batches all customer contacts in sets of 10, and sends personalized marketing offers.
+
+---
+
+## 📦 Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- PostgreSQL database
-- Cloudinary account
-- Resend account
-- Inngest account (or local dev server)
 
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/Shivam-Singh-1/e-commerce-app.git
-cd e-commerce-app
-```
-
-### 2. Setup the server
-
-```bash
-cd server
-npm install
-```
-
-Create `server/.env`:
-
-```env
-DATABASE_URL=postgresql://<user>:<password>@<host>/<db>
-JWT_SECRET=<your_jwt_secret>
-ADMIN_EMAILS=<admin@example.com>
-CLOUDINARY_CLOUD_NAME=<your_cloud_name>
-CLOUDINARY_API_KEY=<your_api_key>
-CLOUDINARY_API_SECRET=<your_api_secret>
-RESEND_API_KEY=<your_resend_key>
-CLIENT_URL=http://localhost:5173
-PORT=5000
-```
-
-```bash
-npx prisma migrate dev
-npm run seed      # optional: seed sample products
-npm run server    # starts with nodemon
-```
-
-### 3. Setup the client
-
-```bash
-cd client
-npm install
-```
-
-Create `client/.env`:
-
-```env
-VITE_API_URL=http://localhost:5000
-```
-
-```bash
-npm run dev
-```
+- **Node.js** v18+
+- **PostgreSQL** database instance
+- **Cloudinary** account (for catalog images)
+- **Resend / Nodemailer** details (for automation emails)
+- **Inngest** dev server running locally (or cloud endpoints)
 
 ---
 
-## 🌐 Deployment
+### Step-by-Step Installation
 
-Both `client/` and `server/` include a `vercel.json` for one-click Vercel deployment.
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shivam-Singh-1/Maps-Clothing-Co.git
+cd Maps-Clothing-Co
+```
+
+#### 2. Configure Backend Services
+
+1. Open the `server` directory and install dependencies:
+   ```bash
+   cd server
+   npm install
+   ```
+
+2. Create a `.env` file inside `server/` with the following configuration:
+   ```env
+   DATABASE_URL="postgresql://<username>:<password>@<host>:<port>/<dbname>?schema=public"
+   JWT_SECRET="your_jwt_signing_secret"
+   ADMIN_EMAILS="admin@maps.com,manager@maps.com"
+   CLOUDINARY_CLOUD_NAME="your_cloudinary_cloud_name"
+   CLOUDINARY_API_KEY="your_cloudinary_api_key"
+   CLOUDINARY_API_SECRET="your_cloudinary_api_secret"
+   RESEND_API_KEY="your_resend_api_key"
+   CLIENT_URL="http://localhost:5173"
+   PORT=5000
+   ```
+
+3. Run migrations and seed sample shirts, jeans, and trousers:
+   ```bash
+   npx prisma migrate dev
+   npm run seed
+   ```
+
+4. Start the Express development server:
+   ```bash
+   npm run server
+   ```
+
+#### 3. Configure Frontend Application
+
+1. Open the `client` directory and install dependencies:
+   ```bash
+   cd ../client
+   npm install
+   ```
+
+2. Create a `.env` file inside `client/` pointing to the backend API:
+   ```env
+   VITE_API_URL="http://localhost:5000"
+   ```
+
+3. Launch the Vite hot-reloads developer server:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## ♿ Accessibility
+## 🛠️ Technology Stack Summary
 
-This application follows WCAG accessibility guidelines:
-
-- All form elements have associated labels or `aria-label` attributes
-- Interactive components are keyboard navigable
-- Color contrast meets WCAG AA standards
-- Screen reader compatible markup
-
----
-
-## 🛠️ Tech Stack Summary
-
-| Layer | Technology |
-|---|---|
-| Frontend | React 19, TypeScript, Tailwind CSS v4, Vite |
-| Routing | React Router v7 |
-| Maps | Leaflet + React Leaflet |
-| Animations | GSAP |
-| Icons | Lucide React |
-| Backend | Express 5, TypeScript, Node.js |
-| ORM | Prisma 6 |
-| Database | PostgreSQL |
-| Auth | JWT + bcrypt |
-| Background Jobs | Inngest |
-| Email | Resend |
-| Media | Cloudinary + Multer |
-| Deployment | Vercel |
+| Layer | Component | Description |
+|---|---|---|
+| **Frontend** | React 19 + TypeScript | Core UI engine using modern hook patterns. |
+| | React Router Dom v7 | Client-side routing and protected routes. |
+| | Leaflet & React Leaflet | Interactive mapping for riders and customer tracking. |
+| | GSAP & Framer Motion | Smooth, premium micro-interactions and carousels. |
+| | Lucide React / React Icons | Streamlined vector icons. |
+| **Backend** | Express 5 | Next-generation Node.js routing. |
+| | Prisma ORM 6 | Type-safe schema querying and migrations. |
+| | Inngest | Event-driven architecture for robust background tasks. |
+| | Cloudinary | Cloud-based media storage and optimization. |
+| | Resend | High-deliverability HTML email sender. |
+| **Database** | PostgreSQL | Robust relational data storage. |
 
 ---
 
 <div align="center">
-  Made with ❤️ by <a href="https://github.com/Shivam-Singh-1">Shivam Singh</a>
+
+Made with ❤️ by [Shivam Singh](https://github.com/Shivam-Singh-1)
+
 </div>
