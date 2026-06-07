@@ -239,8 +239,3 @@ cd Maps-Clothing-Co
 
 ---
 
-<div align="center">
-
-Made with ❤️ by [Shivam Singh](https://github.com/Shivam-Singh-1)
-
-</div>
