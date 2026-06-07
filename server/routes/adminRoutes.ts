@@ -7,11 +7,13 @@ import {
   getAdminStats,
   getDeliveryPartners,
   updateDeliveryPartner,
+  getRevenueStats,
 } from "../controllers/adminController.js";
 
 const adminRouter = express.Router();
 
 adminRouter.get("/stats", auth, admin, getAdminStats);
+adminRouter.get("/revenue", auth, admin, getRevenueStats);
 
 adminRouter.get("/delivery-partners", auth, admin, getDeliveryPartners);
 

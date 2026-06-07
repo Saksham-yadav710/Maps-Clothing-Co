@@ -18,14 +18,14 @@ const PopularProducts = () => {
       .catch((error: any) => {
         toast.error(
           error?.response?.data?.message ||
-            error?.message ||
-            "Failed to load products",
+          error?.message ||
+          "Failed to load products",
         );
       });
   }, []);
 
   return (
-    <section className="pb-16 mt-20">
+    <section className="pb-16 mt-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

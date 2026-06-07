@@ -45,10 +45,10 @@ const Login = () => {
         />
         <div className="relative text-center px-12">
           <h2 className="text-4xl font-semibold text-white mb-4">
-            Welcome to brand_name
+            Welcome to MAPS
           </h2>
           <p className="text-white/60 font-serif text-xl max-w-sm mx-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, vel?
+            Wear Confidence, Spend Smart. Bringing high-quality men's fashion to every wardrobe.
           </p>
         </div>
       </div>
@@ -61,7 +61,7 @@ const Login = () => {
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
               <BikeIcon className="size-8 text-app-green" />
               <span className="text-2xl font-semibold text-app-green">
-                brand_name{" "}
+                MAPS{" "}
               </span>
             </Link>
             <h1 className="text-2xl font-semibold text-app-green mb-2">

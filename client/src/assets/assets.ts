@@ -53,10 +53,10 @@ export const heroSectionData = {
   description:
     "Welcome to MAPS : where quality meets affordability, style meets value, and every customer can truly Wear Confidence, Spend Smart.",
   hero_features: [
-    { icon: TruckIcon, title: "Free Delivery", desc: "Orders over $50" },
-    { icon: AwardIcon, title: "Premium Denim", desc: "Certified quality" },
-    { icon: RotateCcwIcon, title: "Easy Returns", desc: "30-day policy" },
-    { icon: ShieldCheckIcon, title: "Secure Pay", desc: "Safe checkout" },
+    { icon: AwardIcon, title: "Premium Quality", desc: "Carefully curated apparel" },
+    { icon: ShieldCheckIcon, title: "Unbeatable Value", desc: "Spend smart, look great" },
+    { icon: RotateCcwIcon, title: "Diverse Collection", desc: "Fits every personality" },
+    { icon: TruckIcon, title: "Seamless Shopping", desc: "Reliable support & trust" },
   ],
 };
 
@@ -66,7 +66,7 @@ export const deliveryPartnerLoginImage =
 export const appPromoBannerData = {
   title: "Wear Confidence, Spend Smart.",
   description:
-    "Download the MAPS app to explore our diverse collection of high-quality men's fashion at prices that make sense. Enjoy seamless shopping and exclusive deals right in your pocket.",
+    "At MAPS, we bring high-quality men's fashion to every wardrobe. Download our app for a seamless shopping experience and discover unbeatable value right in your pocket.",
 };
 
 export const footerData = {

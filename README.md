@@ -78,9 +78,11 @@ Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Vite**.
 ### Admin Panel (`/admin`)
 
 - **Dashboard** — total orders, users, products, out-of-stock count, recent orders table
+- **Revenue Analytics** — view total revenue, delivered/placed/cancelled order counts filterable by 9 time periods (1D to All Time)
 - **Products** — list, create, edit, delete products with image upload
 - **Orders** — view all orders, update status manually, assign delivery partner
 - **Delivery Partners** — create/update partner profiles, toggle active status
+- **Banner Settings** — dynamically change the global promotional banner text and visibility
 
 ### Delivery Portal (`/delivery`)
 

@@ -236,7 +236,7 @@ const Products = () => {
                     }}
                     className={`size-9 rounded-lg text-sm font-medium transition-colors ${
                       page === i + 1
-                        ? "bg-green text-white"
+                        ? "bg-app-green text-white"
                         : "bg-white text-app-text-light hover:bg-app-cream"
                     }`}
                   >

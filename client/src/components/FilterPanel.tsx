@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
 import type { Category } from "../types";
 
 type SelectedFilters = Record<string, string[]>;
@@ -540,6 +542,10 @@ const FilterPanel = ({
     ...categories,
   ];
   const sections = getSectionsForCategory(category);
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const toggleSection = (key: string) =>
+    setOpenSection((prev) => (prev === key ? null : key));
 
   const isSelected = (key: string, value: string) =>
     selectedFilters[key]?.includes(value);
@@ -601,35 +607,58 @@ const FilterPanel = ({
         </div>
       )}
 
-      <div className="space-y-6">
-        {sections.map((section) => (
-          <div key={section.key}>
-            <h3 className="text-sm font-semibold text-app-green mb-3">
-              {section.label}
-            </h3>
+      <div className="space-y-2">
+        {sections.map((section) => {
+          const isOpen = openSection === section.key;
+          const activeCount = selectedFilters[section.key]?.length ?? 0;
+          return (
+            <div key={section.key} className="border border-app-border rounded-xl overflow-hidden">
+              {/* Accordion header */}
+              <button
+                type="button"
+                onClick={() => toggleSection(section.key)}
+                className="flex items-center justify-between w-full px-4 py-3 text-sm font-semibold text-app-green bg-white hover:bg-app-cream transition-colors"
+              >
+                <span className="flex items-center gap-2">
+                  {section.label}
+                  {activeCount > 0 && (
+                    <span className="bg-app-green text-white text-xs font-bold px-1.5 py-0.5 rounded-full leading-none">
+                      {activeCount}
+                    </span>
+                  )}
+                </span>
+                <ChevronDownIcon
+                  className={`size-4 text-app-text-light transition-transform duration-200 ${
+                    isOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-            <div className="flex flex-wrap gap-2.5">
-              {section.options.map((option) => {
-                const active = isSelected(section.key, option);
-
-                return (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => toggleMultiFilter(section.key, option)}
-                    className={`px-3 py-2 text-sm rounded-md transition-all border ${
-                      active
-                        ? "bg-app-green text-white border-app-green"
-                        : "bg-white text-app-text-light border-app-border hover:bg-app-cream"
-                    }`}
-                  >
-                    {option}
-                  </button>
-                );
-              })}
+              {/* Accordion body */}
+              {isOpen && (
+                <div className="flex flex-wrap gap-2 px-4 pb-4 pt-3 bg-app-cream/40">
+                  {section.options.map((option) => {
+                    const active = isSelected(section.key, option);
+                    return (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => toggleMultiFilter(section.key, option)}
+                        className={`px-3 py-1.5 text-xs rounded-md transition-all border ${
+                          active
+                            ? "bg-app-green text-white border-app-green"
+                            : "bg-white text-app-text-light border-app-border hover:bg-white hover:border-app-green"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {hasFilters && (

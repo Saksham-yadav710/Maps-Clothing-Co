@@ -26,6 +26,8 @@ const AdminDeliveryPartners = lazy(
   () => import("./pages/admin/AdminDeliveryPartners"),
 );
 
+const AdminBanner = lazy(() => import("./pages/admin/AdminBanner"));
+
 const DeliveryLogin = lazy(() => import("./pages/delivery/DeliveryLogin"));
 
 const DeliveryLayout = lazy(() => import("./pages/delivery/DeliveryLayout"));
@@ -96,6 +98,7 @@ const App = () => {
               path="delivery-partners"
               element={<AdminDeliveryPartners />}
             />
+            <Route path="banner" element={<AdminBanner />} />
           </Route>
 
           {/*delivery partner pages*/}

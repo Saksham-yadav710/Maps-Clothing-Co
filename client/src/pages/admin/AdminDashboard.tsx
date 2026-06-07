@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   PackageIcon,
   UsersIcon,
   ShoppingBagIcon,
   AlertTriangleIcon,
+  IndianRupeeIcon,
+  TrendingUpIcon,
+  Loader2Icon,
 } from "lucide-react";
 import { statusColors } from "../../assets/assets";
 import api from "../../config/api";
@@ -18,11 +21,32 @@ interface Stats {
   recentOrders: any[];
 }
 
+const PERIODS = [
+  { label: "1D", value: "1d" },
+  { label: "3D", value: "3d" },
+  { label: "1W", value: "1w" },
+  { label: "1M", value: "1m" },
+  { label: "3M", value: "3m" },
+  { label: "6M", value: "6m" },
+  { label: "9M", value: "9m" },
+  { label: "1Y", value: "1y" },
+  { label: "All Time", value: "all" },
+];
+
 export default function AdminDashboard() {
-  const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$";
+  const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "₹";
 
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const [revPeriod, setRevPeriod] = useState("1m");
+  const [revenue, setRevenue] = useState<{
+    totalRevenue: number;
+    orderCount: number;
+    totalPlacedCount: number;
+    cancelledCount: number;
+  } | null>(null);
+  const [revLoading, setRevLoading] = useState(false);
 
   useEffect(() => {
     api
@@ -31,6 +55,23 @@ export default function AdminDashboard() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  const fetchRevenue = useCallback(async (period: string) => {
+    setRevLoading(true);
+    try {
+      const params = period === "all" ? "" : `?period=${period}`;
+      const { data } = await api.get(`/admin/revenue${params}`);
+      setRevenue(data);
+    } catch {
+      /* ignore */
+    } finally {
+      setRevLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchRevenue(revPeriod);
+  }, [revPeriod, fetchRevenue]);
 
   const cards = stats
     ? [
@@ -77,6 +118,80 @@ export default function AdminDashboard() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Revenue Analytics Card */}
+      <div className="bg-gradient-to-br from-app-green via-emerald-800 to-green-950 rounded-2xl p-6 text-white shadow-lg">
+        <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
+          <div className="flex items-center gap-3">
+            <div className="size-11 rounded-xl bg-white/10 flex-center">
+              <TrendingUpIcon className="size-5 text-white" />
+            </div>
+            <div>
+              <p className="text-xs font-medium text-white/60 uppercase tracking-wider">Revenue from Delivered Orders</p>
+              <p className="text-sm font-semibold text-white/80">
+                {PERIODS.find((p) => p.value === revPeriod)?.label}
+              </p>
+            </div>
+          </div>
+
+          {/* Period selector */}
+          <div className="flex flex-wrap gap-1.5">
+            {PERIODS.map((p) => (
+              <button
+                key={p.value}
+                onClick={() => setRevPeriod(p.value)}
+                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                  revPeriod === p.value
+                    ? "bg-white text-app-green shadow"
+                    : "bg-white/10 text-white/80 hover:bg-white/20"
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Revenue figure */}
+        <div className="flex items-end gap-6 mt-2">
+          {revLoading ? (
+            <div className="flex items-center gap-2 text-white/60 py-4">
+              <Loader2Icon className="animate-spin size-6" />
+              <span className="text-sm">Calculating…</span>
+            </div>
+          ) : (
+            <>
+              <div>
+                <div className="flex items-center gap-1">
+                  <IndianRupeeIcon className="size-7 text-white/80 mb-1" />
+                  <span className="text-5xl font-bold tracking-tight">
+                    {revenue
+                      ? revenue.totalRevenue >= 1_00_000
+                        ? `${(revenue.totalRevenue / 1_00_000).toFixed(2)}L`
+                        : revenue.totalRevenue >= 1_000
+                        ? `${(revenue.totalRevenue / 1_000).toFixed(1)}K`
+                        : revenue.totalRevenue.toFixed(2)
+                      : "0"}
+                  </span>
+                </div>
+                <p className="text-xs text-white/50 mt-1">Total Revenue</p>
+              </div>
+              <div className="pb-1 border-l border-white/20 pl-6">
+                <p className="text-3xl font-bold">{revenue?.orderCount ?? 0}</p>
+                <p className="text-xs text-white/50 mt-1">Orders Delivered</p>
+              </div>
+              <div className="pb-1 border-l border-white/20 pl-6">
+                <p className="text-3xl font-bold">{revenue?.totalPlacedCount ?? 0}</p>
+                <p className="text-xs text-white/50 mt-1">Orders Placed</p>
+              </div>
+              <div className="pb-1 border-l border-white/20 pl-6">
+                <p className="text-3xl font-bold text-red-300">{revenue?.cancelledCount ?? 0}</p>
+                <p className="text-xs text-white/50 mt-1">Orders Cancelled</p>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Recent Orders */}

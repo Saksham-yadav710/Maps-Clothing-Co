@@ -162,3 +162,63 @@ export const assignDeliveryPartner = async (req: Request, res: Response) => {
 
   res.json({ order });
 };
+
+// get revenue stats filtered by time window
+export const getRevenueStats = async (req: Request, res: Response) => {
+  const { period } = req.query as { period?: string };
+
+  let since: Date | null = null;
+  const now = new Date();
+
+  switch (period) {
+    case "1d":
+      since = new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000);
+      break;
+    case "3d":
+      since = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+      break;
+    case "1w":
+      since = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      break;
+    case "1m":
+      since = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      break;
+    case "3m":
+      since = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+      break;
+    case "6m":
+      since = new Date(now.getTime() - 180 * 24 * 60 * 60 * 1000);
+      break;
+    case "9m":
+      since = new Date(now.getTime() - 270 * 24 * 60 * 60 * 1000);
+      break;
+    case "1y":
+      since = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+      break;
+    default:
+      since = null; // all time
+  }
+
+  const baseWhere: any = {};
+  if (since) {
+    baseWhere.createdAt = { gte: since };
+  }
+
+  const [deliveredOrders, totalPlacedCount, cancelledCount] = await Promise.all([
+    prisma.order.findMany({
+      where: { ...baseWhere, status: "Delivered" },
+      select: { total: true },
+    }),
+    prisma.order.count({
+      where: baseWhere,
+    }),
+    prisma.order.count({
+      where: { ...baseWhere, status: "Cancelled" },
+    }),
+  ]);
+
+  const totalRevenue = deliveredOrders.reduce((sum, o) => sum + (o.total ?? 0), 0);
+  const orderCount = deliveredOrders.length;
+
+  res.json({ totalRevenue, orderCount, totalPlacedCount, cancelledCount });
+};

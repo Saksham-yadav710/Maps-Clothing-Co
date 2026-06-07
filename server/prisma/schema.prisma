@@ -109,3 +109,11 @@ model DeliveryPartner {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model BannerSetting {
+  id        String   @id @default("global")
+  text1     String   @default("Free shipping on orders over ₹1250")
+  text2     String   @default("Wear Confidence, Spend Smart with MAPS.")
+  isVisible Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}
