@@ -112,7 +112,7 @@ export default function AdminDashboard() {
               <p className="text-sm text-app-text-light">{card.label}</p>
             </div>
             <div
-              className={`size-10 rounded-xl flex-center bg-orange-50 text-orange-600`}
+              className={`size-10 rounded-xl flex-center bg-app-secondary/10 text-app-secondary`}
             >
               <card.icon className="size-5" />
             </div>
@@ -121,7 +121,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Revenue Analytics Card */}
-      <div className="bg-gradient-to-br from-app-green via-emerald-800 to-green-950 rounded-2xl p-6 text-white shadow-lg">
+      <div className="bg-gradient-to-br from-app-green via-[#1c4170] to-[#0e2440] rounded-2xl p-6 text-white shadow-lg">
         <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
           <div className="flex items-center gap-3">
             <div className="size-11 rounded-xl bg-white/10 flex-center">
@@ -200,7 +200,7 @@ export default function AdminDashboard() {
           <h2 className="text-lg font-semibold text-zinc-900">Recent Orders</h2>
           <Link
             to="/admin/orders"
-            className="text-sm font-medium text-app-orange hover:text-app-orange-dark transition-colors"
+            className="text-sm font-medium text-app-secondary hover:text-app-green transition-colors"
           >
             View All →
           </Link>

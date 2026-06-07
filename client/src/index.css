@@ -24,19 +24,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-app-green: #1b3022;
-  --color-app-green-light: #2d4a35;
-  --color-app-green-lighter: #3d6b4a;
-  --color-app-orange: #f97316;
-  --color-app-orange-dark: #ea580c;
-  --color-app-cream: #faf7f2;
-  --color-app-cream-dark: #f0ebe3;
-  --color-app-text: #1b3022;
+  --color-app-green: #153254;
+  --color-app-green-light: #1c4170;
+  --color-app-green-lighter: #8CB4D6;
+  --color-app-orange: #153254;
+  --color-app-orange-dark: #0e2440;
+  --color-app-cream: #ffffff;
+  --color-app-cream-dark: #f3f5f7;
+  --color-app-text: #153254;
   --color-app-text-light: #6b7280;
   --color-app-border: #e5e7eb;
   --color-app-success: #22c55e;
   --color-app-error: #ef4444;
   --color-app-warning: #f59e0b;
+  --color-app-secondary: #8CB4D6;
 
   --font-sans: "Outfit", sans-serif;
   --font-serif: "DM Serif Display", serif;
@@ -84,7 +85,7 @@ input:focus {
 }
 
 .dropdown-link {
-  @apply flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-500 hover:bg-orange-50/80 hover:text-zinc-900 transition-colors;
+  @apply flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-500 hover:bg-app-cream-dark hover:text-zinc-900 transition-colors;
 }
 
 /* Animations */

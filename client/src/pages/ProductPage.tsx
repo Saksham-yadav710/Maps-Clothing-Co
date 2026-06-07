@@ -131,7 +131,7 @@ const ProductPage = () => {
                 )}
 
                 {product.discount > 0 && (
-                  <span className="px-2.5 py-1 text-xs font-semibold bg-app-orange text-white rounded-full">
+                  <span className="px-2.5 py-1 text-xs font-semibold bg-app-green text-white rounded-full">
                     {product.discount}% OFF
                   </span>
                 )}
@@ -238,8 +238,8 @@ const ProductPage = () => {
                   disabled={product.stock === 0}
                   className={`flex-1 py-3 font-semibold rounded-xl transition-colors flex-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] ${
                     inCart
-                      ? "bg-app-cream text-app-green border border-app-green"
-                      : "bg-app-orange text-white hover:bg-app-orange-dark"
+                      ? "bg-app-cream-dark text-app-green border border-app-green"
+                      : "bg-app-green text-white hover:bg-app-green-light"
                   }`}
                 >
                   <ShoppingCartIcon className="w-4 h-4" />
@@ -269,7 +269,7 @@ const ProductPage = () => {
 
               <Link
                 to={`/products?category=${product.category}`}
-                className="inline-flex items-center gap-1 text-sm font-medium text-app-orange hover:text-app-orange-dark transition-colors"
+                className="inline-flex items-center gap-1 text-sm font-medium text-app-secondary hover:text-app-green transition-colors"
               >
                 View All
                 <ArrowRightIcon className="size-4 " />

@@ -36,7 +36,7 @@ const PopularProducts = () => {
           </div>
           <Link
             to="/products"
-            className="text-sm font-semibold text-app-orange hover:text-app-orange-dark flex items-center gap-1 transition-colors"
+            className="text-sm font-semibold text-app-secondary hover:text-app-green flex items-center gap-1 transition-colors"
           >
             View All <ArrowRightIcon className="size-4" />
           </Link>

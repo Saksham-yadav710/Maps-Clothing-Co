@@ -309,7 +309,7 @@ export default function AdminProductForm() {
                       onChange={(e) =>
                         setImageFile(e.target.files?.[0] || null)
                       }
-                      className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-app-orange file:text-white hover:file:bg-orange-600 cursor-pointer"
+                      className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 focus:border-app-green outline-none transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-app-green file:text-white hover:file:bg-app-green-light cursor-pointer"
                     />
                   </div>
                 </div>
@@ -504,7 +504,7 @@ export default function AdminProductForm() {
               <button
                 disabled={saving}
                 type="submit"
-                className="px-6 py-2.5 bg-app-orange text-white font-medium rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
+                className="px-6 py-2.5 bg-app-green text-white font-medium rounded-lg hover:bg-app-green-light transition-colors disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Product"}
               </button>

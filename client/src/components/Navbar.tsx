@@ -58,10 +58,10 @@ const Navbar = () => {
 
         <div className="w-full flex items-center justify-end gap-4 lg:gap-10">
           {/*Nav links- Desktop */}
-          <div className="hidden md:flex items-center gap-6 text-sm text-zinc-600">
+          <div className="hidden md:flex items-center gap-6 text-sm text-app-text hover:*:text-app-secondary transition-colors">
             <Link to="/">Home</Link>
             <Link to="/products">Products</Link>
-            <Link to="/deals" className="text-app-orange">
+            <Link to="/deals" className="text-app-secondary">
               Deals
             </Link>
           </div>
@@ -77,7 +77,7 @@ const Navbar = () => {
                 placeholder="Search products here..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 p-2 bg-orange-50 rounded-full ring ring-app-orange/15 focus:ring-app-orange/30"
+                className="w-full pl-8 p-2 bg-app-cream-dark rounded-full ring ring-app-green/10 focus:ring-app-green/25"
               />
             </div>
           </form>
@@ -92,7 +92,7 @@ const Navbar = () => {
             >
               <ShoppingCartIcon className="size-5 text-zinc-900" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 size-4 bg-app-orange text-white text-[10px] rounded-full flex-center">
+                <span className="absolute -top-1 -right-1 size-4 bg-app-green text-white text-[10px] rounded-full flex-center">
                   {cartCount}
                 </span>
               )}
@@ -112,7 +112,7 @@ const Navbar = () => {
                 <div className="flex-center gap-2">
                   <Link
                     to="/login"
-                    className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-950 rounded-full hover:bg-green-950-light transition-colors"
+                    className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-app-green rounded-full hover:bg-app-green-light transition-colors"
                   >
                     <UserIcon size={16} /> Sign In
                   </Link>
@@ -178,10 +178,10 @@ const Navbar = () => {
                       {user?.isAdmin && (
                         <Link to="/admin/products" className="dropdown-link">
                           <ShieldIcon
-                            className="text-app-orange-dark"
+                            className="text-app-secondary"
                             size={16}
                           />
-                          <span className="text-app-orange-dark">
+                          <span className="text-app-secondary">
                             Admin Panel
                           </span>
                         </Link>

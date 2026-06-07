@@ -88,13 +88,13 @@ const Hero = () => {
       {/* Hero copy — anchored to bottom */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 pt-10 w-full">
         <div className="max-w-xl xl:pl-10">
-          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-orange-300 bg-orange-300/10 rounded-full mb-5">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-app-secondary bg-app-secondary/10 rounded-full mb-5">
             <SparklesIcon className="size-3" /> Exquisitely Crafted
           </span>
 
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-5">
             Elevate your wardrobe with{" "}
-            <span className="text-orange-300">timeless elegance</span>
+            <span className="text-app-secondary">timeless elegance</span>
           </h1>
 
           <p className="text-base text-white/70 leading-relaxed mb-8 max-w-md">
@@ -106,7 +106,7 @@ const Hero = () => {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/products"
-              className="px-7 py-3 bg-orange-400 text-white font-semibold rounded-full hover:bg-orange-500 transition-all flex items-center gap-2 active:scale-[0.98]"
+              className="px-7 py-3 bg-app-secondary text-white font-semibold rounded-full hover:bg-[#7aa3c5] transition-all flex items-center gap-2 active:scale-[0.98]"
             >
               Shop Collection <ArrowRightIcon className="size-4" />
             </Link>
@@ -138,7 +138,7 @@ const Hero = () => {
               }}
               className={`rounded-full transition-all duration-500 ${
                 i === real
-                  ? "w-7 h-[3px] bg-orange-400"
+                  ? "w-7 h-[3px] bg-app-secondary"
                   : "w-[6px] h-[6px] bg-white/30 hover:bg-white/60"
               }`}
             />
@@ -148,7 +148,7 @@ const Hero = () => {
         <div className="w-20 h-px bg-white/15 overflow-hidden rounded-full">
           <div
             key={real}
-            className="h-full bg-orange-400 rounded-full"
+            className="h-full bg-app-secondary rounded-full"
             style={{
               animation: `heroProgress ${INTERVAL_MS}ms linear forwards`,
             }}

@@ -75,7 +75,7 @@ const Login = () => {
                 : "Already have an account?"}{" "}
               <button
                 onClick={() => setIsLoginState(!isLoginState)}
-                className="text-orange-500 ml-1 font-semibold hover:text-orange-600 transition-colors"
+                className="text-app-secondary ml-1 font-semibold hover:text-app-green transition-colors"
               >
                 {isLoginState ? "Create One" : "Sign In"}
               </button>
@@ -132,7 +132,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="flex-center w-full py-3 bg-green-950 text-white font-semibold rounded-xl hover:bg-green-900 transition:colors disabled:opacity-50"
+              className="flex-center w-full py-3 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition:colors disabled:opacity-50"
             >
               {loading ? (
                 <Loader2Icon className="animate-spin" />

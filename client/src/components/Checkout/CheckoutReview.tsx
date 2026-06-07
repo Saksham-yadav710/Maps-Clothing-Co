@@ -66,7 +66,7 @@ export default function CheckoutReview({
       <button
         onClick={handlePlaceOrder}
         disabled={loading}
-        className="w-full py-3 bg-app-orange text-white font-semibold rounded-xl hover:bg-app-orange-dark transition-colors disabled:opacity-60 active:scale-[0.98]"
+        className="w-full py-3 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition-colors disabled:opacity-60 active:scale-[0.98]"
       >
         {loading
           ? "Placing Order..."

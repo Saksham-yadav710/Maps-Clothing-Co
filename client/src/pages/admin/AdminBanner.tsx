@@ -51,7 +51,7 @@ const AdminBanner = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold text-green-950 mb-6">Banner Settings</h1>
+      <h1 className="text-2xl font-bold text-app-green mb-6">Banner Settings</h1>
 
       <div className="bg-white rounded-2xl shadow-sm border p-6 max-w-2xl">
         <form onSubmit={handleSave} className="space-y-6">
@@ -98,7 +98,7 @@ const AdminBanner = () => {
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center gap-2 px-6 py-2.5 bg-app-green text-white font-semibold rounded-xl hover:bg-green-800 disabled:opacity-50 transition-colors"
+              className="flex items-center gap-2 px-6 py-2.5 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light disabled:opacity-50 transition-colors"
             >
               {saving ? <Loader2Icon className="animate-spin size-5" /> : <SaveIcon className="size-5" />}
               Save Changes

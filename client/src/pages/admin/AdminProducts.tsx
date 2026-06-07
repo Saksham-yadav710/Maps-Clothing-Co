@@ -52,7 +52,7 @@ export default function AdminProducts() {
           <h2 className="text-xl font-semibold text-zinc-900">Products</h2>
           <Link
             to="/admin/products/new"
-            className="flex items-center gap-2 px-4 py-2 bg-app-green text-white rounded-xl hover:bg-green-950 transition-colors font-medium text-sm"
+            className="flex items-center gap-2 px-4 py-2 bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors font-medium text-sm"
           >
             <PlusIcon className="size-4" /> Add Product
           </Link>
@@ -117,7 +117,7 @@ export default function AdminProducts() {
                       <div className="flex items-center justify-end gap-2">
                         <Link
                           to={`/admin/products/${product.id}/edit`}
-                          className="p-2 text-zinc-500 hover:text-app-orange bg-zinc-100 hover:bg-orange-50 rounded-lg transition-colors"
+                          className="p-2 text-zinc-500 hover:text-app-secondary bg-zinc-100 hover:bg-app-secondary/10 rounded-lg transition-colors"
                         >
                           <EditIcon className="size-4" />
                         </Link>

@@ -38,7 +38,7 @@ const ProductCard = ({ product }: Props) => {
         {/* badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           {product.discount > 0 && (
-            <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-app-orange text-white rounded-full">
+            <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-app-green text-white rounded-full">
               {product.discount}% OFF
             </span>
           )}
@@ -46,7 +46,7 @@ const ProductCard = ({ product }: Props) => {
       </div>
 
       {/* product info */}
-      <div className="p-3.5 text-zinc-700">
+      <div className="p-3.5 text-app-text">
         <h3 className="text-sm leading-snug mb-1.5 line-clamp-2">
           {product.name}
         </h3>
@@ -85,7 +85,7 @@ const ProductCard = ({ product }: Props) => {
               e.stopPropagation();
               addToCart(product);
             }}
-            className="size-7 rounded-full bg-app-orange text-white flex-center shrink-0 hover:bg-app-orange-dark transition-colors active:scale-95"
+            className="size-7 rounded-full bg-app-green text-white flex-center shrink-0 hover:bg-app-green-light transition-colors active:scale-95"
           >
             <Plus className="size-3.5" />
           </button>

@@ -35,7 +35,7 @@ const CheckoutAddress = ({ user, address, setAddress, setStep }: any) => {
                     {addr.label}
                   </span>
                   {addr.isDefault && (
-                    <span className="text-[10px] font-semibold text-app-orange uppercase tracking-wider bg-orange-50 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-semibold text-app-secondary uppercase tracking-wider bg-app-secondary/10 px-2 py-0.5 rounded-full">
                       Default
                     </span>
                   )}

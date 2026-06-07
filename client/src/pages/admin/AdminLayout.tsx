@@ -38,7 +38,7 @@ export default function AdminLayout() {
         <aside className="w-full lg:w-64 shrink-0 h-fit bg-white rounded-2xl p-4 border border-app-border">
           <div className="pb-4 mb-4 border-b border-app-border">
             <h2 className="text-lg font-semibold text-app-green flex items-center gap-2 px-2">
-              <ShieldIcon className="size-5 text-green-900" /> Admin Panel
+              <ShieldIcon className="size-5 text-app-green" /> Admin Panel
             </h2>
           </div>
           <nav className="flex flex-col gap-1.5">
@@ -51,7 +51,7 @@ export default function AdminLayout() {
                   `flex items-center gap-3 p-2.5 rounded-md text-sm transition-colors ${
                     isActive
                       ? "bg-app-green text-white"
-                      : "text-app-text-light hover:bg-orange-50 hover:text-zinc-900"
+                      : "text-app-text-light hover:bg-app-cream-dark hover:text-zinc-900"
                   }`
                 }
               >

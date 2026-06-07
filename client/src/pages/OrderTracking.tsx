@@ -98,7 +98,7 @@ const OrderTracking = () => {
                 ? "bg-green-100 text-green-700"
                 : order!.status === "Cancelled"
                   ? "bg-red-100 text-red-700"
-                  : "bg-app-orange/10 text-app-orange"
+                  : "bg-app-secondary/10 text-app-secondary"
             }`}
           >
             {order!.status}

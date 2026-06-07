@@ -8,7 +8,7 @@ type Cat = (typeof categoriesData)[0];
 const CategoryItem = ({ cat, hidden }: { cat: Cat; hidden?: boolean }) => {
   const content = (
     <>
-      <div className="size-18 sm:size-26 sm:p-2 rounded-2xl overflow-hidden bg-orange-100 group-hover:ring-2 ring-orange-300/75 transition-all">
+      <div className="size-18 sm:size-26 sm:p-2 rounded-2xl overflow-hidden bg-app-cream-dark group-hover:ring-2 ring-app-secondary/75 transition-all">
         <img
           src={cat.image}
           alt={hidden ? "" : cat.name}
