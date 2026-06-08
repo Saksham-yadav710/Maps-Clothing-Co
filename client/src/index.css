@@ -23,25 +23,46 @@
 }
 @import "tailwindcss";
 
-@theme {
-  --color-app-green: #153254;
-  --color-app-green-light: #1c4170;
-  --color-app-green-lighter: #8CB4D6;
-  --color-app-orange: #153254;
-  --color-app-orange-dark: #0e2440;
-  --color-app-cream: #ffffff;
-  --color-app-cream-dark: #f3f5f7;
-  --color-app-text: #153254;
-  --color-app-text-light: #6b7280;
-  --color-app-border: #e5e7eb;
-  --color-app-success: #22c55e;
-  --color-app-error: #ef4444;
-  --color-app-warning: #f59e0b;
-  --color-app-secondary: #8CB4D6;
+/* ─── MAPS CLOTHING CO. — PREMIUM DESIGN SYSTEM ─── */
 
+@theme {
+  /* Primary — extracted from logo wordmark */
+  --color-app-green: #1A2D50;
+  --color-app-green-light: #243A63;
+  --color-app-green-lighter: #7BA4C8;
+
+  /* Legacy orange tokens → mapped to primary navy */
+  --color-app-orange: #1A2D50;
+  --color-app-orange-dark: #111E38;
+
+  /* Surfaces */
+  --color-app-cream: #FAFBFD;
+  --color-app-cream-dark: #F0F2F5;
+
+  /* Typography */
+  --color-app-text: #1A2D50;
+  --color-app-text-light: #64748B;
+
+  /* Borders */
+  --color-app-border: #E2E8F0;
+
+  /* Semantic */
+  --color-app-success: #10B981;
+  --color-app-error: #EF4444;
+  --color-app-warning: #F59E0B;
+
+  /* Secondary — extracted from logo mountain peaks */
+  --color-app-secondary: #7BA4C8;
+
+  /* Tertiary — extracted from logo compass/ice elements */
+  --color-app-ice: #B5CDE0;
+
+  /* Fonts */
   --font-sans: "Outfit", sans-serif;
   --font-serif: "DM Serif Display", serif;
 }
+
+/* ─── BASE ─── */
 
 body {
   font-family: var(--font-sans);
@@ -49,52 +70,95 @@ body {
   background-color: var(--color-app-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
-/* Scrollbar */
+/* ─── PREMIUM SCROLLBAR ─── */
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-app-cream);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-app-green-lighter);
-  border-radius: 3px;
+  background: var(--color-app-ice);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-app-secondary);
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-/* Smooth transitions globally */
+/* ─── GLOBAL TRANSITIONS ─── */
+
 a,
 button {
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 input:focus {
   outline: none;
 }
 
+/* ─── UTILITIES ─── */
+
 .flex-center {
   @apply flex items-center justify-center;
 }
 
 .dropdown-link {
-  @apply flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-500 hover:bg-app-cream-dark hover:text-zinc-900 transition-colors;
+  @apply flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-500
+         hover:bg-app-cream-dark hover:text-app-green transition-colors;
 }
 
-/* Animations */
+/* ─── PREMIUM CARD SYSTEM ─── */
+
+.card-premium {
+  @apply bg-white rounded-2xl border border-app-border/60;
+  box-shadow:
+    0 1px 3px rgba(26, 45, 80, 0.04),
+    0 4px 12px rgba(26, 45, 80, 0.03);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+  box-shadow:
+    0 4px 16px rgba(26, 45, 80, 0.08),
+    0 12px 40px rgba(26, 45, 80, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ─── GLASSMORPHISM ─── */
+
+.glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.glass-dark {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(26, 45, 80, 0.85);
+  border: 1px solid rgba(123, 164, 200, 0.15);
+}
+
+/* ─── ANIMATIONS ─── */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -106,7 +170,6 @@ input:focus {
     opacity: 0;
     transform: translateX(100%);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -118,7 +181,6 @@ input:focus {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -130,26 +192,62 @@ input:focus {
   100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.7;
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-slide-in-right {
-  animation: slideInRight 0.3s ease-out forwards;
+  animation: slideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-slide-in-up {
-  animation: slideInUp 0.4s ease-out forwards;
+  animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-pulse-soft {
   animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 
 @keyframes infinite-scroll {
@@ -163,4 +261,34 @@ input:focus {
 
 .animate-infinite-scroll {
   animation: infinite-scroll 25s linear infinite;
+}
+
+/* ─── PREMIUM BUTTON STYLES ─── */
+
+.btn-primary {
+  @apply px-6 py-3 bg-app-green text-white font-semibold rounded-xl
+         hover:bg-app-green-light transition-all active:scale-[0.98];
+  box-shadow: 0 2px 8px rgba(26, 45, 80, 0.2);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 16px rgba(26, 45, 80, 0.3);
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-app-secondary text-white font-semibold rounded-xl
+         hover:bg-app-green-lighter transition-all active:scale-[0.98];
+  box-shadow: 0 2px 8px rgba(123, 164, 200, 0.3);
+}
+
+.btn-ghost {
+  @apply px-6 py-3 bg-transparent text-app-green font-semibold rounded-xl
+         border border-app-border hover:bg-app-cream-dark transition-all;
+}
+
+/* ─── SELECTION COLOR ─── */
+
+::selection {
+  background: var(--color-app-ice);
+  color: var(--color-app-green);
 }

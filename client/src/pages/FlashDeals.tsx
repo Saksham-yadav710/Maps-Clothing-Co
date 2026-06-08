@@ -22,12 +22,13 @@ const FlashDeals = () => {
   return (
     <div className="min-h-screen bg-app-cream">
       {/* banner */}
-      <div className="bg-linear-to-r from-app-green to-[#1c4170] text-white py-10">
+      <div className="bg-gradient-to-r from-[#0D1929] via-[#1A2D50] to-[#0D1929] text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, #7BA4C8 0%, transparent 50%), radial-gradient(circle at 70% 50%, #B5CDE0 0%, transparent 50%)'}} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex-center gap-2 mb-3">
-            <Zap className="size-6 fill-white" />
-            <h1 className="text-3xl font-semibold">Flash Deals</h1>
-            <Zap className="size-6 fill-white" />
+            <Zap className="size-6 fill-app-ice text-app-ice" />
+            <h1 className="text-3xl font-bold tracking-tight">Flash Deals</h1>
+            <Zap className="size-6 fill-app-ice text-app-ice" />
           </div>
 
           <p className="text-white/80 max-w-md mx-auto">

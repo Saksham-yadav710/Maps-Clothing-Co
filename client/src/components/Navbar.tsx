@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
+    <nav className="glass sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 gap-4">
         {/* Logo Section Updated */}
         <Link
@@ -58,10 +58,10 @@ const Navbar = () => {
 
         <div className="w-full flex items-center justify-end gap-4 lg:gap-10">
           {/*Nav links- Desktop */}
-          <div className="hidden md:flex items-center gap-6 text-sm text-app-text hover:*:text-app-secondary transition-colors">
-            <Link to="/">Home</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/deals" className="text-app-secondary">
+          <div className="hidden md:flex items-center gap-7 text-sm font-medium text-app-text/80">
+            <Link to="/" className="hover:text-app-green transition-colors">Home</Link>
+            <Link to="/products" className="hover:text-app-green transition-colors">Products</Link>
+            <Link to="/deals" className="text-app-secondary hover:text-app-green transition-colors">
               Deals
             </Link>
           </div>
@@ -77,7 +77,7 @@ const Navbar = () => {
                 placeholder="Search products here..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 p-2 bg-app-cream-dark rounded-full ring ring-app-green/10 focus:ring-app-green/25"
+                className="w-full pl-8 p-2 bg-app-cream-dark/80 rounded-full border border-app-border/60 focus:border-app-secondary focus:bg-white transition-all"
               />
             </div>
           </form>
@@ -92,7 +92,7 @@ const Navbar = () => {
             >
               <ShoppingCartIcon className="size-5 text-zinc-900" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 size-4 bg-app-green text-white text-[10px] rounded-full flex-center">
+                <span className="absolute -top-1.5 -right-1.5 size-[18px] bg-app-green text-white text-[10px] font-bold rounded-full flex-center shadow-sm">
                   {cartCount}
                 </span>
               )}
@@ -112,7 +112,7 @@ const Navbar = () => {
                 <div className="flex-center gap-2">
                   <Link
                     to="/login"
-                    className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-app-green rounded-full hover:bg-app-green-light transition-colors"
+                    className="hidden md:flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-app-green rounded-full hover:bg-app-green-light transition-all shadow-md shadow-app-green/20 hover:shadow-lg hover:shadow-app-green/30"
                   >
                     <UserIcon size={16} /> Sign In
                   </Link>
@@ -135,7 +135,7 @@ const Navbar = () => {
                     className="fixed inset-0 z-40"
                     onClick={() => setUserMenuOpen(false)}
                   />
-                  <div className="absolute right-0 mt-2.5 w-56 bg-white rounded-xl shadow-lg border border-app-border py-2 z-50 animate-fade-in">
+                  <div className="absolute right-0 mt-2.5 w-56 bg-white rounded-2xl shadow-xl shadow-app-green/8 border border-app-border/60 py-2 z-50 animate-scale-in">
                     {user && (
                       <div className="px-4 py-2 border-b border-app-border">
                         <p className="text-sm font-medium text-zinc-900">

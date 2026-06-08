@@ -82,19 +82,19 @@ const Hero = () => {
       </div>
 
       {/* Gradient — left strong, fades right, also bottom darkening for text */}
-      <div className="absolute inset-0 bg-gradient-to-r from-app-green via-app-green/70 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-app-green/40 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#111E38]/95 via-[#1A2D50]/75 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0D1929]/60 via-transparent to-transparent" />
 
       {/* Hero copy — anchored to bottom */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 pt-10 w-full">
         <div className="max-w-xl xl:pl-10">
-          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-app-secondary bg-app-secondary/10 rounded-full mb-5">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-app-ice bg-app-ice/15 border border-app-ice/25 rounded-full mb-5 tracking-wide">
             <SparklesIcon className="size-3" /> Exquisitely Crafted
           </span>
 
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-5">
             Elevate your wardrobe with{" "}
-            <span className="text-app-secondary">timeless elegance</span>
+            <span className="text-app-secondary italic">timeless elegance</span>
           </h1>
 
           <p className="text-base text-white/70 leading-relaxed mb-8 max-w-md">
@@ -106,13 +106,13 @@ const Hero = () => {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/products"
-              className="px-7 py-3 bg-app-secondary text-white font-semibold rounded-full hover:bg-[#7aa3c5] transition-all flex items-center gap-2 active:scale-[0.98]"
+              className="px-7 py-3.5 bg-app-secondary text-white font-semibold rounded-full hover:bg-app-green-lighter transition-all flex items-center gap-2 active:scale-[0.98] shadow-lg shadow-app-secondary/30"
             >
               Shop Collection <ArrowRightIcon className="size-4" />
             </Link>
             <Link
               to="/products"
-              className="px-7 py-3 bg-white/10 text-white font-semibold rounded-full hover:bg-white/20 transition-all border border-white/20"
+              className="px-7 py-3.5 bg-white/10 text-white font-semibold rounded-full hover:bg-white/20 transition-all border border-white/25 backdrop-blur-sm"
             >
               Explore Styles
             </Link>

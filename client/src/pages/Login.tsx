@@ -37,19 +37,33 @@ const Login = () => {
   return (
     <div className="min-h-screen flex">
       {/*Left Side*/}
-      <div className="hidden lg:flex lg:w-1/2 bg-app-green relative items-center justify-center">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0D1929] via-[#1A2D50] to-[#243A63] relative items-center justify-center overflow-hidden">
+        {/* Decorative blobs */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-app-ice/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-app-secondary/15 rounded-full blur-3xl" />
         <img
           src={heroSectionData.hero_image}
           alt=""
-          className="absolute inset-0 object-cover h-full bg-center opacity-10"
+          className="absolute inset-0 object-cover object-top h-full w-full opacity-10"
         />
-        <div className="relative text-center px-12">
-          <h2 className="text-4xl font-semibold text-white mb-4">
+        <div className="relative text-center px-12 z-10">
+          <div className="mb-8 flex-center">
+            <img src="/src/assets/logo.png" alt="MAPS Logo" className="h-24 w-auto brightness-0 invert opacity-90" />
+          </div>
+          <h2 className="text-4xl font-semibold text-white mb-4 leading-tight">
             Welcome to MAPS
           </h2>
-          <p className="text-white/60 font-serif text-xl max-w-sm mx-auto">
+          <p className="text-white/55 font-serif text-lg max-w-sm mx-auto leading-relaxed">
             Wear Confidence, Spend Smart. Bringing high-quality men's fashion to every wardrobe.
           </p>
+          <div className="mt-10 flex justify-center gap-8">
+            {[{v:'50+',l:'Brands'},{v:'100+',l:'Products'},{v:'98%',l:'Satisfaction'}].map(s => (
+              <div key={s.l} className="text-center">
+                <div className="text-2xl font-bold text-white">{s.v}</div>
+                <div className="text-xs text-white/40 mt-0.5">{s.l}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -59,10 +73,7 @@ const Login = () => {
           {/* form header message */}
           <div className="text-center mb-8">
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
-              <BikeIcon className="size-8 text-app-green" />
-              <span className="text-2xl font-semibold text-app-green">
-                MAPS{" "}
-              </span>
+              <img src="/src/assets/logo.png" alt="MAPS Logo" className="h-12 w-auto" />
             </Link>
             <h1 className="text-2xl font-semibold text-app-green mb-2">
               {isLoginState

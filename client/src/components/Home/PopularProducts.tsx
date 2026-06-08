@@ -29,14 +29,17 @@ const PopularProducts = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-semibold">Our Popular Products</h2>
-            <p className="text-sm text-app-text-light mt-1">
-              Out top-rated products this season
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-1 h-5 rounded-full bg-app-secondary" />
+              <h2 className="text-2xl font-semibold text-app-green">Our Popular Products</h2>
+            </div>
+            <p className="text-sm text-app-text-light mt-1 ml-3">
+              Our top-rated products this season
             </p>
           </div>
           <Link
             to="/products"
-            className="text-sm font-semibold text-app-secondary hover:text-app-green flex items-center gap-1 transition-colors"
+            className="text-sm font-semibold text-app-secondary hover:text-app-green flex items-center gap-1.5 transition-all hover:gap-2.5"
           >
             View All <ArrowRightIcon className="size-4" />
           </Link>

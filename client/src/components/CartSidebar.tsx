@@ -37,15 +37,15 @@ const CartSidebar = () => {
       >
         {/* sidebar */}
         <div
-          className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 shadow-2xl flex flex-col animate-slide-in-right"
+          className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 shadow-2xl shadow-app-green/10 flex flex-col animate-slide-in-right"
           onClick={(e) => e.stopPropagation()}
         >
           {/* header */}
           <div className="flex items-center justify-between p-5 border-b border-app-border">
             <div className="flex items-center gap-2">
-              <ShoppingBagIcon className="size-5" />
-              <h2 className="text-lg font-medium">Your Cart</h2>
-              <span className="px-2 py-0.5 text-xs font-semibold bg-app-cream rounded-full">
+              <ShoppingBagIcon className="size-5 text-app-green" />
+              <h2 className="text-lg font-semibold text-app-green">Your Cart</h2>
+              <span className="px-2 py-0.5 text-xs font-bold bg-app-secondary/15 text-app-secondary rounded-full">
                 {items.length}
               </span>
             </div>
@@ -69,7 +69,7 @@ const CartSidebar = () => {
               items.map((item) => (
                 <div
                   key={item.product.id}
-                  className="flex gap-3 bg-app-cream/60 rounded-xl p-3"
+                  className="flex gap-3 bg-app-cream-dark rounded-xl p-3 transition-all hover:shadow-sm"
                 >
                   <img
                     src={item.product.image}
@@ -171,7 +171,7 @@ const CartSidebar = () => {
                   navigate("/checkout");
                   window.scrollTo(0, 0);
                 }}
-                className="w-full py-3 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition-colors flex-center gap-2 active:scale-[0.98]"
+                className="w-full py-3.5 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition-all flex-center gap-2 active:scale-[0.98] shadow-md shadow-app-green/20 hover:shadow-lg hover:shadow-app-green/30"
               >
                 Proceed to CheckOut <ArrowRightIcon className="size-4" />
               </button>
