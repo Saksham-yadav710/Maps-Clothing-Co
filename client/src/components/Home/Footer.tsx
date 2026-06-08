@@ -4,10 +4,10 @@ import logoImg from "../../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0D1929] text-white relative overflow-hidden">
+    <footer className="gradient-footer text-white relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-app-secondary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-app-ice/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-sky/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
         {/* Top */}
@@ -30,7 +30,7 @@ const Footer = () => {
                   aria-label="social-media icons"
                   key={i}
                   href={social.link}
-                  className="size-9 rounded-xl bg-white/8 border border-white/10 flex-center hover:bg-app-secondary/20 hover:border-app-secondary/40 transition-all"
+                  className="size-9 rounded-xl bg-white/8 border border-white/10 flex-center hover:bg-gold/20 hover:border-gold/40 transition-all"
                 >
                   <social.icon className="size-4 text-white/70" />
                 </a>
@@ -41,7 +41,7 @@ const Footer = () => {
           {/* Dynamic sections */}
           {footerData.sections.map((section, i) => (
             <div key={i}>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-app-ice mb-5">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-gold mb-5">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -70,7 +70,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-app-ice mb-5">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-gold mb-5">
               Contact Us
             </h3>
             <ul className="space-y-3.5">
@@ -78,7 +78,7 @@ const Footer = () => {
                 const Icon = item.icon;
                 return (
                   <li key={i} className="flex gap-3 text-sm text-white/50">
-                    <Icon className="size-4 text-app-secondary shrink-0 mt-0.5" />
+                    <Icon className="size-4 text-gold shrink-0 mt-0.5" />
                     {item.text}
                   </li>
                 );
@@ -96,7 +96,7 @@ const Footer = () => {
             © {new Date().getFullYear()} MAPS Clothing Co. All rights reserved.
           </p>
           <div className="flex items-center gap-1.5">
-            <div className="size-1.5 rounded-full bg-app-secondary animate-pulse-soft" />
+            <div className="size-1.5 rounded-full bg-gold animate-pulse-soft" />
             <span className="text-xs text-white/30">Crafted with precision</span>
           </div>
         </div>

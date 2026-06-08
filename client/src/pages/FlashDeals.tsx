@@ -22,13 +22,13 @@ const FlashDeals = () => {
   return (
     <div className="min-h-screen bg-app-cream">
       {/* banner */}
-      <div className="bg-gradient-to-r from-[#0D1929] via-[#1A2D50] to-[#0D1929] text-white py-12 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, #7BA4C8 0%, transparent 50%), radial-gradient(circle at 70% 50%, #B5CDE0 0%, transparent 50%)'}} />
+      <div className="gradient-deal text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, #C8A951 0%, transparent 50%), radial-gradient(circle at 70% 50%, #A8872E 0%, transparent 50%)'}} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex-center gap-2 mb-3">
-            <Zap className="size-6 fill-app-ice text-app-ice" />
+            <Zap className="size-6 fill-white text-white" />
             <h1 className="text-3xl font-bold tracking-tight">Flash Deals</h1>
-            <Zap className="size-6 fill-app-ice text-app-ice" />
+            <Zap className="size-6 fill-white text-white" />
           </div>
 
           <p className="text-white/80 max-w-md mx-auto">
@@ -42,8 +42,8 @@ const FlashDeals = () => {
           <PageLoader />
         ) : products.length === 0 ? (
           <div className="text-center py-16">
-            <Zap className="size-16 text-app-border mx-auto mb-4" />
-            <h2 className="text-lg font-semibold text-app-green mb-2">
+            <Zap className="size-16 text-[#DDD8CE] mx-auto mb-4" />
+            <h2 className="text-lg font-semibold text-navy-deep mb-2">
               No Deals Right Now!!
             </h2>
             <p className="text-sm text-app-text-light">

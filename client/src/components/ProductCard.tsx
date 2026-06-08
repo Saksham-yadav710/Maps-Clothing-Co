@@ -35,10 +35,12 @@ const ProductCard = ({ product }: Props) => {
           height={225}
           className="w-full h-full object-cover p-4 group-hover:p-2 transition-all duration-300"
         />
+        {/* card overlay */}
+        <div className="absolute inset-0 card-overlay pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         {/* badges */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
           {product.discount > 0 && (
-            <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-app-green text-white rounded-full">
+            <span className="px-2 py-0.5 text-[10px] font-bold uppercase bg-alert text-white rounded-full">
               {product.discount}% OFF
             </span>
           )}
@@ -47,14 +49,14 @@ const ProductCard = ({ product }: Props) => {
 
       {/* product info */}
       <div className="p-3.5 text-app-text">
-        <h3 className="text-sm leading-snug mb-1.5 line-clamp-2">
+        <h3 className="text-sm leading-snug mb-1.5 line-clamp-2 min-h-[40px]">
           {product.name}
         </h3>
         {/* rating */}
         {product.rating > 0 && (
           <div className="flex items-center gap-1 mb-2">
-            <Star className="size-3 text-app-warning fill-app-warning" />
-            <span className="text-xs font-medium text-app-text">
+            <Star className="size-3 text-gold fill-gold" />
+            <span className="text-xs font-medium text-navy-deep">
               {product.rating}
             </span>
             <span className="text-xs text-app-text-light">
@@ -85,9 +87,9 @@ const ProductCard = ({ product }: Props) => {
               e.stopPropagation();
               addToCart(product);
             }}
-            className="size-7 rounded-full bg-app-green text-white flex-center shrink-0 hover:bg-app-green-light transition-colors active:scale-95"
+            className="size-7 rounded-full bg-gold text-navy-deep flex-center shrink-0 hover:bg-gold-dark hover:text-white transition-colors active:scale-95"
           >
-            <Plus className="size-3.5" />
+            <Plus className="size-4" />
           </button>
         </div>
       </div>

@@ -30,8 +30,8 @@ const PopularProducts = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-1 h-5 rounded-full bg-app-secondary" />
-              <h2 className="text-2xl font-semibold text-app-green">Our Popular Products</h2>
+              <div className="w-1 h-5 rounded-full bg-gold" />
+              <h2 className="text-2xl font-semibold text-navy-deep">Our Popular Products</h2>
             </div>
             <p className="text-sm text-app-text-light mt-1 ml-3">
               Our top-rated products this season
@@ -39,7 +39,7 @@ const PopularProducts = () => {
           </div>
           <Link
             to="/products"
-            className="text-sm font-semibold text-app-secondary hover:text-app-green flex items-center gap-1.5 transition-all hover:gap-2.5"
+            className="text-sm font-semibold text-gold hover:text-gold-dark flex items-center gap-1.5 transition-all hover:gap-2.5"
           >
             View All <ArrowRightIcon className="size-4" />
           </Link>

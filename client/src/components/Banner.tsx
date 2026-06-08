@@ -35,7 +35,7 @@ const Banner = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-[#111E38] via-app-green to-[#111E38] text-white text-xs sm:text-sm relative overflow-hidden">
+      <div className="bg-gradient-to-r from-navy-deep via-navy-brand to-sky text-white text-xs sm:text-sm relative overflow-hidden gradient-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex-center gap-6">
           <div className="flex-center gap-2">
             <TruckIcon className="size-4 shrink-0" />
@@ -45,7 +45,7 @@ const Banner = () => {
           </div>
           <span className="hidden sm:inline text-white/40">|</span>
           <div className="hidden sm:flex items-center gap-2">
-            <SparklesIcon className="size-3.5 fill-yellow-400 text-yellow-400 shrink-0" />
+            <SparklesIcon className="size-3.5 fill-gold text-gold shrink-0" />
             <span>{bannerData.text2}</span>
           </div>
         </div>

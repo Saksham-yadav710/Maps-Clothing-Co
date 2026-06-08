@@ -2,7 +2,6 @@ import { useState } from "react";
 import { heroSectionData } from "../assets/assets";
 import { Link } from "react-router-dom";
 import {
-  BikeIcon,
   Loader2Icon,
   LockIcon,
   MailIcon,
@@ -57,7 +56,7 @@ const Login = () => {
             Wear Confidence, Spend Smart. Bringing high-quality men's fashion to every wardrobe.
           </p>
           <div className="mt-10 flex justify-center gap-8">
-            {[{v:'50+',l:'Brands'},{v:'100+',l:'Products'},{v:'98%',l:'Satisfaction'}].map(s => (
+            {[{ v: '50+', l: 'Brands' }, { v: '100+', l: 'Products' }, { v: '98%', l: 'Satisfaction' }].map(s => (
               <div key={s.l} className="text-center">
                 <div className="text-2xl font-bold text-white">{s.v}</div>
                 <div className="text-xs text-white/40 mt-0.5">{s.l}</div>
@@ -75,7 +74,7 @@ const Login = () => {
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
               <img src="/src/assets/logo.png" alt="MAPS Logo" className="h-12 w-auto" />
             </Link>
-            <h1 className="text-2xl font-semibold text-app-green mb-2">
+            <h1 className="text-2xl font-semibold text-navy-deep mb-2">
               {isLoginState
                 ? "Sign In to your account"
                 : "Sign Up for an account"}
@@ -86,7 +85,7 @@ const Login = () => {
                 : "Already have an account?"}{" "}
               <button
                 onClick={() => setIsLoginState(!isLoginState)}
-                className="text-app-secondary ml-1 font-semibold hover:text-app-green transition-colors"
+                className="text-gold ml-1 font-semibold hover:text-gold-dark transition-colors"
               >
                 {isLoginState ? "Create One" : "Sign In"}
               </button>
@@ -143,7 +142,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="flex-center w-full py-3 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition:colors disabled:opacity-50"
+              className="flex-center w-full btn-gold disabled:opacity-50"
             >
               {loading ? (
                 <Loader2Icon className="animate-spin" />

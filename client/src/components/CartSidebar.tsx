@@ -43,9 +43,9 @@ const CartSidebar = () => {
           {/* header */}
           <div className="flex items-center justify-between p-5 border-b border-app-border">
             <div className="flex items-center gap-2">
-              <ShoppingBagIcon className="size-5 text-app-green" />
-              <h2 className="text-lg font-semibold text-app-green">Your Cart</h2>
-              <span className="px-2 py-0.5 text-xs font-bold bg-app-secondary/15 text-app-secondary rounded-full">
+              <ShoppingBagIcon className="size-5 text-navy-deep" />
+              <h2 className="text-lg font-semibold text-navy-deep">Your Cart</h2>
+              <span className="px-2 py-0.5 text-xs font-bold bg-gold/15 text-gold rounded-full">
                 {items.length}
               </span>
             </div>
@@ -171,7 +171,7 @@ const CartSidebar = () => {
                   navigate("/checkout");
                   window.scrollTo(0, 0);
                 }}
-                className="w-full py-3.5 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition-all flex-center gap-2 active:scale-[0.98] shadow-md shadow-app-green/20 hover:shadow-lg hover:shadow-app-green/30"
+                className="w-full btn-gold"
               >
                 Proceed to CheckOut <ArrowRightIcon className="size-4" />
               </button>

@@ -5,7 +5,7 @@ const AppPromotionBanner = () => {
   return (
     <section className="my-14 relative overflow-hidden rounded-3xl">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0D1929] via-[#1A2D50] to-[#243A63]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy-brand to-[#112646]" />
 
       {/* Decorative blobs */}
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-app-ice/15 rounded-full blur-3xl" />
@@ -17,7 +17,7 @@ const AppPromotionBanner = () => {
         <div className="flex-1 text-center md:text-left px-8 sm:px-12 lg:px-16 py-14 md:py-20">
           {/* Pill badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
-            <SparklesIcon className="size-3.5 text-app-ice" />
+            <SparklesIcon className="size-3.5 text-gold" />
             Premium Men's Fashion
           </div>
 
@@ -42,7 +42,7 @@ const AppPromotionBanner = () => {
                   key={i}
                   src={url}
                   alt={`Happy customer ${i + 1}`}
-                  className="size-8 rounded-full border-2 border-app-green object-cover"
+                  className="size-8 rounded-full border-2 border-navy-deep object-cover"
                 />
               ))}
             </div>
@@ -51,18 +51,18 @@ const AppPromotionBanner = () => {
             </div>
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <StarIcon key={i} className="size-3.5 fill-app-ice text-app-ice" />
+                <StarIcon key={i} className="size-3.5 fill-gold text-gold" />
               ))}
             </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-            <button className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-app-green font-semibold rounded-xl hover:bg-app-cream-dark transition-all shadow-lg shadow-black/25 text-sm hover:-translate-y-0.5">
+            <button className="btn-gold shadow-lg shadow-black/25 text-sm">
               <ShoppingBagIcon className="size-4" />
               Shop Now
             </button>
-            <button className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-colors border border-white/25 backdrop-blur-sm text-sm">
+            <button className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-colors border border-white/25 backdrop-blur-sm text-sm active:scale-[0.98]">
               <SparklesIcon className="size-4" />
               Explore Collection
             </button>
@@ -86,7 +86,7 @@ const AppPromotionBanner = () => {
         {/* Right side image panel */}
         <div className="relative md:w-[420px] lg:w-[480px] shrink-0 self-stretch hidden md:block">
           {/* Gradient overlay on left edge to blend with content */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#1A2D50] to-transparent z-10" />
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-navy-brand to-transparent z-10" />
           <img
             src={heroSectionData.hero_image}
             alt="MAPS Fashion Apparel"
@@ -99,7 +99,7 @@ const AppPromotionBanner = () => {
           <div className="absolute bottom-8 left-8 z-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-xl">
             <p className="text-white text-xs font-medium opacity-80">New Arrivals</p>
             <p className="text-white text-base font-bold">Summer 2026</p>
-            <p className="text-app-ice text-xs mt-1 font-semibold">Up to 40% off</p>
+            <p className="text-gold text-xs mt-1 font-semibold">Up to 40% off</p>
           </div>
         </div>
       </div>

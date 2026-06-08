@@ -82,19 +82,19 @@ const Hero = () => {
       </div>
 
       {/* Gradient — left strong, fades right, also bottom darkening for text */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#111E38]/95 via-[#1A2D50]/75 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0D1929]/60 via-transparent to-transparent" />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(13, 30, 62, 0.95) 0%, rgba(26, 58, 107, 0.85) 33%, transparent 60%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(13, 30, 62, 0.8) 0%, transparent 33%)' }} />
 
       {/* Hero copy — anchored to bottom */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 pt-10 w-full">
         <div className="max-w-xl xl:pl-10">
-          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-app-ice bg-app-ice/15 border border-app-ice/25 rounded-full mb-5 tracking-wide">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-gold bg-gold/15 border border-gold/25 rounded-full mb-5 tracking-wide">
             <SparklesIcon className="size-3" /> Exquisitely Crafted
           </span>
 
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-5">
             Elevate your wardrobe with{" "}
-            <span className="text-app-secondary italic">timeless elegance</span>
+            <span className="text-gold italic">timeless elegance</span>
           </h1>
 
           <p className="text-base text-white/70 leading-relaxed mb-8 max-w-md">
@@ -106,7 +106,7 @@ const Hero = () => {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/products"
-              className="px-7 py-3.5 bg-app-secondary text-white font-semibold rounded-full hover:bg-app-green-lighter transition-all flex items-center gap-2 active:scale-[0.98] shadow-lg shadow-app-secondary/30"
+              className="btn-gold"
             >
               Shop Collection <ArrowRightIcon className="size-4" />
             </Link>
@@ -138,7 +138,7 @@ const Hero = () => {
               }}
               className={`rounded-full transition-all duration-500 ${
                 i === real
-                  ? "w-7 h-[3px] bg-app-secondary"
+                  ? "w-7 h-[3px] bg-gold"
                   : "w-[6px] h-[6px] bg-white/30 hover:bg-white/60"
               }`}
             />
@@ -148,7 +148,7 @@ const Hero = () => {
         <div className="w-20 h-px bg-white/15 overflow-hidden rounded-full">
           <div
             key={real}
-            className="h-full bg-app-secondary rounded-full"
+            className="h-full bg-gold rounded-full"
             style={{
               animation: `heroProgress ${INTERVAL_MS}ms linear forwards`,
             }}

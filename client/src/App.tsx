@@ -44,10 +44,24 @@ const App = () => {
         toastOptions={{
           duration: 3000,
           style: {
-            background: "#1A2D50",
+            background: "#0D1E3E",
             color: "#fff",
             borderRadius: "12px",
             fontSize: "14px",
+            fontWeight: "500",
+            border: "1px solid rgba(200,169,81,0.25)",
+          },
+          success: {
+            iconTheme: {
+              primary: "#C8A951",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#C8A951",
+              secondary: "#fff",
+            },
           },
         }}
       />
