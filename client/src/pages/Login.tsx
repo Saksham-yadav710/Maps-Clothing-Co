@@ -72,7 +72,7 @@ const Login = () => {
           {/* form header message */}
           <div className="text-center mb-8">
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
-              <img src="/src/assets/logo.png" alt="MAPS Logo" className="h-12 w-auto" />
+              <img src="client/public/logo.png" alt="MAPS Logo" className="h-12 w-auto" />
             </Link>
             <h1 className="text-2xl font-semibold text-navy-deep mb-2">
               {isLoginState
