@@ -13,7 +13,7 @@ const PopularProducts = () => {
     api
       .get("/products?sort=rating")
       .then(({ data }) => {
-        setProducts(data.products);
+        setProducts(data.products || []);
       })
       .catch((error: any) => {
         toast.error(
