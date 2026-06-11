@@ -47,7 +47,7 @@ const Login = () => {
         />
         <div className="relative text-center px-12 z-10">
           <div className="mb-8 flex-center">
-            <img src="/src/assets/logo.png" alt="MAPS Logo" className="h-24 w-auto brightness-0 invert opacity-90" />
+            <img src="client/public/logo.png" alt="MAPS Logo" className="h-24 w-auto brightness-0 invert opacity-90" />
           </div>
           <h2 className="text-4xl font-semibold text-white mb-4 leading-tight">
             Welcome to MAPS
