@@ -47,7 +47,7 @@ const Login = () => {
         />
         <div className="relative text-center px-12 z-10">
           <div className="mb-8 flex-center">
-            <img src="client/public/logo.png" alt="MAPS Logo" className="h-24 w-auto brightness-0 invert opacity-90" />
+            <img src="client/public/maps.png" alt="MAPS Logo" className="h-24 w-auto brightness-0 invert opacity-90" />
           </div>
           <h2 className="text-4xl font-semibold text-white mb-4 leading-tight">
             Welcome to MAPS
@@ -72,7 +72,7 @@ const Login = () => {
           {/* form header message */}
           <div className="text-center mb-8">
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
-              <img src="client/public/logo.png" alt="MAPS Logo" className="h-12 w-auto" />
+              <img src="client/public/maps.png" alt="MAPS Logo" className="h-12 w-auto" />
             </Link>
             <h1 className="text-2xl font-semibold text-navy-deep mb-2">
               {isLoginState
